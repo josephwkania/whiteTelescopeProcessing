@@ -1,0 +1,418 @@
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
+| Date         : Wed Jan 24 10:37:34 2018
+| Host         : achaudhari-du running 64-bit Ubuntu 16.04.3 LTS
+| Command      : report_utilization -omit_locs -file /home/ashish/git/fpgadev/n3xx_1/usrp3/top/e300/build-E3XX_idle_sg3/build.rpt
+| Design       : e300
+| Device       : 7z020clg484-3
+| Design State : Routed
+----------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Slice Logic
+1.1 Summary of Registers by Type
+2. Slice Logic Distribution
+3. Memory
+4. DSP
+5. IO and GT Specific
+6. Clocking
+7. Specific Feature
+8. Primitives
+9. Black Boxes
+10. Instantiated Netlists
+
+1. Slice Logic
+--------------
+
++----------------------------+------+-----------+-------+
+|          Site Type         | Used | Available | Util% |
++----------------------------+------+-----------+-------+
+| Slice LUTs                 | 1143 |     53200 |  2.15 |
+|   LUT as Logic             | 1035 |     53200 |  1.95 |
+|   LUT as Memory            |  108 |     17400 |  0.62 |
+|     LUT as Distributed RAM |   14 |           |       |
+|     LUT as Shift Register  |   94 |           |       |
+| Slice Registers            | 1709 |    106400 |  1.61 |
+|   Register as Flip Flop    | 1709 |    106400 |  1.61 |
+|   Register as Latch        |    0 |    106400 |  0.00 |
+| F7 Muxes                   |    0 |     26600 |  0.00 |
+| F8 Muxes                   |    0 |     13300 |  0.00 |
++----------------------------+------+-----------+-------+
+
+
+1.1 Summary of Registers by Type
+--------------------------------
+
++-------+--------------+-------------+--------------+
+| Total | Clock Enable | Synchronous | Asynchronous |
++-------+--------------+-------------+--------------+
+| 0     |            _ |           - |            - |
+| 0     |            _ |           - |          Set |
+| 0     |            _ |           - |        Reset |
+| 0     |            _ |         Set |            - |
+| 0     |            _ |       Reset |            - |
+| 0     |          Yes |           - |            - |
+| 33    |          Yes |           - |          Set |
+| 69    |          Yes |           - |        Reset |
+| 81    |          Yes |         Set |            - |
+| 1526  |          Yes |       Reset |            - |
++-------+--------------+-------------+--------------+
+
+
+2. Slice Logic Distribution
+---------------------------
+
++-------------------------------------------+------+-----------+-------+
+|                 Site Type                 | Used | Available | Util% |
++-------------------------------------------+------+-----------+-------+
+| Slice                                     |  484 |     13300 |  3.64 |
+|   SLICEL                                  |  284 |           |       |
+|   SLICEM                                  |  200 |           |       |
+| LUT as Logic                              | 1035 |     53200 |  1.95 |
+|   using O5 output only                    |    0 |           |       |
+|   using O6 output only                    |  798 |           |       |
+|   using O5 and O6                         |  237 |           |       |
+| LUT as Memory                             |  108 |     17400 |  0.62 |
+|   LUT as Distributed RAM                  |   14 |           |       |
+|     using O5 output only                  |    0 |           |       |
+|     using O6 output only                  |    2 |           |       |
+|     using O5 and O6                       |   12 |           |       |
+|   LUT as Shift Register                   |   94 |           |       |
+|     using O5 output only                  |    1 |           |       |
+|     using O6 output only                  |   89 |           |       |
+|     using O5 and O6                       |    4 |           |       |
+| LUT Flip Flop Pairs                       |  606 |     53200 |  1.14 |
+|   fully used LUT-FF pairs                 |  154 |           |       |
+|   LUT-FF pairs with one unused LUT output |  413 |           |       |
+|   LUT-FF pairs with one unused Flip Flop  |  397 |           |       |
+| Unique Control Sets                       |   79 |           |       |
++-------------------------------------------+------+-----------+-------+
+* Note: Review the Control Sets Report for more information regarding control sets.
+
+
+3. Memory
+---------
+
++-------------------+------+-----------+-------+
+|     Site Type     | Used | Available | Util% |
++-------------------+------+-----------+-------+
+| Block RAM Tile    |  1.5 |       140 |  1.07 |
+|   RAMB36/FIFO*    |    1 |       140 |  0.71 |
+|     RAMB36E1 only |    1 |           |       |
+|   RAMB18          |    1 |       280 |  0.36 |
+|     RAMB18E1 only |    1 |           |       |
++-------------------+------+-----------+-------+
+* Note: Each Block RAM Tile only has one FIFO logic available and therefore can accommodate only one FIFO36E1 or one FIFO18E1. However, if a FIFO18E1 occupies a Block RAM Tile, that tile can still accommodate a RAMB18E1
+
+
+4. DSP
+------
+
++-----------+------+-----------+-------+
+| Site Type | Used | Available | Util% |
++-----------+------+-----------+-------+
+| DSPs      |    0 |       220 |  0.00 |
++-----------+------+-----------+-------+
+
+
+5. IO and GT Specific
+---------------------
+
++-----------------------------+------+-----------+--------+
+|          Site Type          | Used | Available |  Util% |
++-----------------------------+------+-----------+--------+
+| Bonded IOB                  |  113 |       200 |  56.50 |
+|   IOB Master Pads           |   56 |           |        |
+|   IOB Slave Pads            |   57 |           |        |
+| Bonded IPADs                |    0 |         2 |   0.00 |
+| Bonded IOPADs               |  130 |       130 | 100.00 |
+| PHY_CONTROL                 |    0 |         4 |   0.00 |
+| PHASER_REF                  |    0 |         4 |   0.00 |
+| OUT_FIFO                    |    0 |        16 |   0.00 |
+| IN_FIFO                     |    0 |        16 |   0.00 |
+| IDELAYCTRL                  |    0 |         4 |   0.00 |
+| IBUFDS                      |    0 |       192 |   0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |        16 |   0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |        16 |   0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |       200 |   0.00 |
+| ILOGIC                      |    0 |       200 |   0.00 |
+| OLOGIC                      |    0 |       200 |   0.00 |
++-----------------------------+------+-----------+--------+
+
+
+6. Clocking
+-----------
+
++------------+------+-----------+-------+
+|  Site Type | Used | Available | Util% |
++------------+------+-----------+-------+
+| BUFGCTRL   |    3 |        32 |  9.38 |
+| BUFIO      |    0 |        16 |  0.00 |
+| MMCME2_ADV |    1 |         4 | 25.00 |
+| PLLE2_ADV  |    0 |         4 |  0.00 |
+| BUFMRCE    |    0 |         8 |  0.00 |
+| BUFHCE     |    0 |        72 |  0.00 |
+| BUFR       |    0 |        16 |  0.00 |
++------------+------+-----------+-------+
+
+
+7. Specific Feature
+-------------------
+
++-------------+------+-----------+-------+
+|  Site Type  | Used | Available | Util% |
++-------------+------+-----------+-------+
+| BSCANE2     |    0 |         4 |  0.00 |
+| CAPTUREE2   |    0 |         1 |  0.00 |
+| DNA_PORT    |    0 |         1 |  0.00 |
+| EFUSE_USR   |    0 |         1 |  0.00 |
+| FRAME_ECCE2 |    0 |         1 |  0.00 |
+| ICAPE2      |    0 |         2 |  0.00 |
+| STARTUPE2   |    0 |         1 |  0.00 |
+| XADC        |    0 |         1 |  0.00 |
++-------------+------+-----------+-------+
+
+
+8. Primitives
+-------------
+
++------------+------+----------------------+
+|  Ref Name  | Used |  Functional Category |
++------------+------+----------------------+
+| FDRE       | 1526 |         Flop & Latch |
+| LUT3       |  356 |                  LUT |
+| LUT5       |  283 |                  LUT |
+| LUT6       |  273 |                  LUT |
+| LUT4       |  204 |                  LUT |
+| BIBUF      |  130 |                   IO |
+| LUT2       |  118 |                  LUT |
+| IBUF       |  105 |                   IO |
+| OBUFT      |  100 |                   IO |
+| FDSE       |   81 |         Flop & Latch |
+| SRLC32E    |   79 |   Distributed Memory |
+| FDCE       |   69 |         Flop & Latch |
+| CARRY4     |   40 |           CarryLogic |
+| LUT1       |   38 |                  LUT |
+| FDPE       |   33 |         Flop & Latch |
+| RAMD32     |   20 |   Distributed Memory |
+| SRL16E     |   19 |   Distributed Memory |
+| OBUF       |    8 |                   IO |
+| RAMS32     |    6 |   Distributed Memory |
+| BUFG       |    3 |                Clock |
+| RAMB36E1   |    1 |         Block Memory |
+| RAMB18E1   |    1 |         Block Memory |
+| PS7        |    1 | Specialized Resource |
+| MMCME2_ADV |    1 |                Clock |
++------------+------+----------------------+
+
+
+9. Black Boxes
+--------------
+
++----------+------+
+| Ref Name | Used |
++----------+------+
+
+
+10. Instantiated Netlists
+-------------------------
+
++-------------------------------------+------+
+|               Ref Name              | Used |
++-------------------------------------+------+
+| processing_system7_3                |    1 |
+| e300_ps_fclk0_mmcm                  |    1 |
+| axi_interconnect                    |    1 |
+| axi4_to_axi3_protocol_converter     |    1 |
+| axi4_fifo_512x64                    |    1 |
+| axi3_to_axi4lite_protocol_converter |    1 |
++-------------------------------------+------+
+
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
+| Date         : Wed Jan 24 10:37:34 2018
+| Host         : achaudhari-du running 64-bit Ubuntu 16.04.3 LTS
+| Command      : report_timing_summary -no_detailed_paths -file /home/ashish/git/fpgadev/n3xx_1/usrp3/top/e300/build-E3XX_idle_sg3/build.rpt -append
+| Design       : e300
+| Device       : 7z020-clg484
+| Speed File   : -3  PRODUCTION 1.11 2014-09-11
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  false
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock
+2. checking constant_clock
+3. checking pulse_width_clock
+4. checking unconstrained_internal_endpoints
+5. checking no_input_delay
+6. checking no_output_delay
+7. checking multiple_clock
+8. checking generated_clocks
+9. checking loops
+10. checking partial_input_delay
+11. checking partial_output_delay
+12. checking latch_loops
+
+1. checking no_clock
+--------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock
+--------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock
+-----------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints
+--------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay
+--------------------------
+ There are 3 input ports with no input delay specified. (HIGH)
+
+ There is 1 input port with no input delay but user has a false path constraint. (MEDIUM)
+
+
+6. checking no_output_delay
+---------------------------
+ There is 1 port with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock
+--------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks
+----------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops
+-----------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay
+--------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay
+---------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops
+------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+     12.317        0.000                      0                 4430        0.036        0.000                      0                 4430        7.000        0.000                       0                  1844  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock                                                                  Waveform(ns)         Period(ns)      Frequency(MHz)
+-----                                                                  ------------         ----------      --------------
+GPS_PPS                                                                {0.000 50.000}       100.000         10.000          
+clk_fpga_0                                                             {0.000 10.000}       20.000          50.000          
+clk_fpga_1                                                             {0.000 5.000}        10.000          100.000         
+clk_fpga_2                                                             {0.000 4.000}        8.000           125.000         
+clk_fpga_3                                                             {0.000 3.250}        6.499           153.870         
+inst_e300_processing_system/inst_e300_ps_fclk0_mmcm/inst/clk_50MHz_in  {0.000 10.000}       20.000          50.000          
+  clk_50MHz_out_e300_ps_fclk0_mmcm                                     {0.000 10.000}       20.000          50.000          
+  clkfbout_e300_ps_fclk0_mmcm                                          {0.000 10.000}       20.000          50.000          
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock                                                                      WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----                                                                      -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+clk_fpga_0                                                                                                                                                                                                              18.408        0.000                       0                     1  
+inst_e300_processing_system/inst_e300_ps_fclk0_mmcm/inst/clk_50MHz_in                                                                                                                                                    7.000        0.000                       0                     1  
+  clk_50MHz_out_e300_ps_fclk0_mmcm                                          12.317        0.000                      0                 4334        0.036        0.000                      0                 4334        8.950        0.000                       0                  1839  
+  clkfbout_e300_ps_fclk0_mmcm                                                                                                                                                                                           18.408        0.000                       0                     3  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group                        From Clock                        To Clock                              WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------                        ----------                        --------                              -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+**async_default**                 clk_50MHz_out_e300_ps_fclk0_mmcm  clk_50MHz_out_e300_ps_fclk0_mmcm       17.127        0.000                      0                   96        0.438        0.000                      0                   96  
+
+

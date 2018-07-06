@@ -128,7 +128,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(392, 12)</value>
+      <value>(672, 452)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -136,11 +136,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>display_integration</value>
+      <value>giantout_bin</value>
     </param>
     <param>
       <key>value</key>
-      <value>0.001</value>
+      <value>giant_prefix + timenow + ".bin"</value>
     </param>
   </block>
   <block>
@@ -155,61 +155,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(120, 96)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>freq</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>1420.5e6</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(800, 472)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>giantout</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>"/home/dspradio/giantPulses/" + timenow + "_Drift.h5"</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(264, 8)</value>
+      <value>(280, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -222,33 +168,6 @@
     <param>
       <key>value</key>
       <value>10</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(648, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>prefix</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>"/home/dspradio/grc_data/"</value>
     </param>
   </block>
   <block>
@@ -276,33 +195,6 @@
     <param>
       <key>value</key>
       <value>prefix + timenow + "_Drift.h5"</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(16, 96)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2.5e6</value>
     </param>
   </block>
   <block>
@@ -384,33 +276,6 @@
     <param>
       <key>value</key>
       <value>datetime.now().strftime("%Y-%m-%d_%H.%M.%S")</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(176, 4)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>vec_length</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>2048</value>
     </param>
   </block>
   <block>
@@ -673,6 +538,57 @@
     </param>
   </block>
   <block>
+    <key>blocks_file_sink</key>
+    <param>
+      <key>append</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>giantout_bin</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(904, 664)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_file_sink_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>unbuffered</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>vec_length</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_integrate_xx</key>
     <param>
       <key>alias</key>
@@ -688,7 +604,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>int((integration_time)*samp_rate/vec_length)/int(display_integration*samp_rate/vec_length)</value>
+      <value>int((integration_time)*samp_rate/vec_length)/int(fast_integration*samp_rate/vec_length)</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -739,7 +655,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>int(display_integration*samp_rate/vec_length)</value>
+      <value>int(fast_integration*samp_rate/vec_length)</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -772,57 +688,6 @@
     <param>
       <key>vlen</key>
       <value>vec_length</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_integrate_xx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>decim</key>
-      <value>vec_length</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(632, 628)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_integrate_xx_1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -1092,7 +957,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 100)</value>
+      <value>(320, 108)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1156,57 +1021,6 @@
     <param>
       <key>type</key>
       <value>complex</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>vec_length</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_vector</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(624, 708)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_vector_0_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1328,7 +1142,7 @@
     </param>
   </block>
   <block>
-    <key>blocks_vector_to_stream</key>
+    <key>parameter</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1338,16 +1152,12 @@
       <value></value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(672, 540)</value>
+      <value>(400, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1355,27 +1165,27 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_vector_to_stream_0</value>
+      <value>fast_integration</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>eng_float</value>
     </param>
     <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>vec_length</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
+      <key>value</key>
+      <value>0.0005</value>
     </param>
   </block>
   <block>
@@ -1442,6 +1252,100 @@
     </param>
   </block>
   <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(120, 100)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>freq</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>eng_float</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1.4205e9</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(840, 452)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>giant_prefix</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"/home/dspradio/giantPulses/"</value>
+    </param>
+  </block>
+  <block>
     <key>import</key>
     <param>
       <key>alias</key>
@@ -1504,7 +1408,7 @@
     </param>
   </block>
   <block>
-    <key>radio_astro_hdf5_sink</key>
+    <key>parameter</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -1514,16 +1418,12 @@
       <value></value>
     </param>
     <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
       <key>_enabled</key>
       <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 664)</value>
+      <value>(648, 4)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1531,31 +1431,27 @@
     </param>
     <param>
       <key>id</key>
-      <value>radio_astro_hdf5_sink_0</value>
+      <value>prefix</value>
     </param>
     <param>
-      <key>fname</key>
-      <value>giantout</value>
+      <key>label</key>
+      <value></value>
     </param>
     <param>
-      <key>freq_start</key>
-      <value>0</value>
+      <key>short_id</key>
+      <value></value>
     </param>
     <param>
-      <key>freq_step</key>
-      <value>1</value>
+      <key>hide</key>
+      <value>none</value>
     </param>
     <param>
-      <key>notes</key>
-      <value>This is integrated spectra ~1ms cadence</value>
+      <key>type</key>
+      <value>string</value>
     </param>
     <param>
-      <key>pointing</key>
-      <value>alt=72,az=180</value>
-    </param>
-    <param>
-      <key>vec_length</key>
-      <value>vec_length</value>
+      <key>value</key>
+      <value>"/home/dspradio/grc_data/"</value>
     </param>
   </block>
   <block>
@@ -1611,6 +1507,53 @@
     <param>
       <key>vec_length</key>
       <value>vec_length</value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(16, 100)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>samp_rate</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>eng_float</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>2.5e6</value>
     </param>
   </block>
   <block>
@@ -2952,6 +2895,53 @@
       <value></value>
     </param>
   </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(176, 4)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>vec_length</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>intx</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>1024</value>
+    </param>
+  </block>
   <connection>
     <source_block_id>blocks_add_xx_0</source_block_id>
     <sink_block_id>fft_vxx_0</sink_block_id>
@@ -2990,19 +2980,13 @@
   </connection>
   <connection>
     <source_block_id>blocks_integrate_xx_0_0</source_block_id>
-    <sink_block_id>blocks_integrate_xx_0</sink_block_id>
+    <sink_block_id>blocks_file_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_integrate_xx_0_0</source_block_id>
-    <sink_block_id>blocks_vector_to_stream_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_integrate_xx_1</source_block_id>
-    <sink_block_id>blocks_stream_to_vector_0_0_0</sink_block_id>
+    <sink_block_id>blocks_integrate_xx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3049,12 +3033,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_vector_0_0_0</source_block_id>
-    <sink_block_id>radio_astro_hdf5_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_stream_to_vector_0_1</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
     <source_key>0</source_key>
@@ -3063,12 +3041,6 @@
   <connection>
     <source_block_id>blocks_stream_to_vector_0_2</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_vector_to_stream_0</source_block_id>
-    <sink_block_id>blocks_integrate_xx_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

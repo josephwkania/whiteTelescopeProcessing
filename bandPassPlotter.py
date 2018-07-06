@@ -5,21 +5,20 @@ import h5py, csv, sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-from subprocess import call
 
 class bandPassPlotter(object):
     def __init__(self, *args):
-        self.flength = 2048#default value
+        self.flength = 1024#default value
         self.primaryFreq = 1420.5
         self.secondaryFreq = 1420.2
         self.primarySpec = args[0]
         if len(args) >= 2: 
             self.secondarySpec = args[1]
             self.switch = True
-        elif len(args) >= 3:
+        if len(args) >= 3:
             self.flength = args[2]
-            self.primaryFreq = args[3]/10**6.0
-            self.secondaryFreq = args[4]/10/0**6.0
+            self.primaryFreq = args[3]/10.0**6.0
+            self.secondaryFreq = args[4]/10.0**6.0
             
 
     def plot(self):
@@ -105,10 +104,9 @@ class bandPassPlotter(object):
             csvfile.write("#az=+180, alt=+72, time={0}UTC\n".format(self.primarySpec.split('/')[-1].split('_D')[0]))
             csvwriter.writerows(zip(freq,spectrum,spectrum2))
 
-        call(["/bin/bash","/home/odroid/Documents/dspira-master/grc-flowgraphs/movieMaker.sh"])
-
          
 if __name__ == "__main__":#if the program is run at top level
+    print "In main"
     if len(sys.argv) == 1:
         bandPassPlotter(sys.argv[1]).plot()
     elif len(sys.argv) == 2:

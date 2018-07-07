@@ -36,7 +36,7 @@ print("Telescope RAJ={0:.2f}".format(RAJ))
 
 os.chdir("/home/odroid/gnuradio/lib/uhd/utils/share/uhd/images")#need to be in this directory for the ettus board to run
 
-if separationNow < separationLimit:
+if True: #separationNow < separationLimit:
     import headless_usrp_giantpulse
     #from singlePulsePlotter import singlePulsePlotter
     tb1 = headless_usrp_giantpulse.headless_usrp_giantpulse(fast_integration=fast_integrationPulse, prefix=prefixOne, samp_rate=sampleRate, vec_length=vecLength, freq=freqOne, giant_prefix=prefixGiant)#this is copied from gnuradio's main()
@@ -56,7 +56,7 @@ if separationNow < separationLimit:
     spdic["nchans"] = int(vecLength)
     spdic["nifs"] = int(1)
     spdic["fch1"] = float((freqOne-sampleRate/2.0+sampleRate/vecLength)/10.0**6.0)
-    spdic["foff"] = float(sampleRate/(vecLength*1.0e6))
+    spdic["foff"] = float(sampleRate/(vecLength*10.0**6.0))
     spdic["tsamp"] = float(fast_integrationPulse)
     spdic["tstart"] = float(t.mjd)
     
@@ -80,7 +80,7 @@ else:
 
 time.sleep(waitTime)
 
-if separationNow < separationLimit:
+if True:#separationNow < separationLimit:
     tb2 =  headless_usrp_giantpulse.headless_usrp_giantpulse(fast_integration=fast_integrationPulse, prefix=prefixTwo, samp_rate=sampleRate, vec_length=vecLength, freq=freqTwo, giant_prefix=prefixGiant)
     tb2.start()
     time.sleep(integrationTime)
@@ -98,7 +98,7 @@ if separationNow < separationLimit:
     spdic["nchans"] = int(vecLength)
     spdic["nifs"] = int(1)
     spdic["fch1"] = float((freqOne-sampleRate/2.0+sampleRate/vecLength)/10.0**6.0)
-    spdic["foff"] = float(sampleRate)
+    spdic["foff"] = float(sampleRate/10.0**6.0)
     spdic["tsamp"] = float(fast_integrationPulse)
     spdic["tstart"] = float(t.mjd)
     

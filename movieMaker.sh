@@ -7,12 +7,12 @@
 
 rm /home/dspradio/grc_data/"$(date +%Y-%m-%d).mp4"
 
-/usr/bin/ffmpeg -pattern_type glob -framerate 5 -i "/home/dspradio/grc_data/$(date +%Y-%m-%d)*_Drift.png" "/home/dspradio/grc_data/$(date +%Y-%m-%d).mp4" 
+/usr/bin/ffmpeg -pattern_type glob -framerate 2 -i "/home/dspradio/grc_data/$(date +%Y-%m-%d)*_Drift.png" "/home/dspradio/grc_data/$(date +%Y-%m-%d).mp4" 
 
 
 rm /home/dspradio/grc_data/"$(date +%Y-%m-%d).gif" 
 rm /home/dspradio/grc_data/palette.png 
 
-/usr/bin/ffmpeg -i /home/dspradio/grc_data/platteCreator.png -vf palettegen  /home/dspradio/grc_data/palette.png
+/usr/bin/ffmpeg -i /home/odroid/Documents/dspira-master/grc-flowgraphs/platteCreator.png -vf palettegen  /home/dspradio/grc_data/palette.png
 
-/usr/bin/ffmpeg -pattern_type glob -framerate 5 -i "/home/dspradio/grc_data/$(date +%Y-%m-%d)*_Drift.png"  -i /home/dspradio/grc_data/palette.png -lavfi paletteuse /home/dspradio/grc_data/$(date +%Y-%m-%d).gif
+/usr/bin/ffmpeg -pattern_type glob -framerate 2 -thread_queue_size 256 -i "/home/dspradio/grc_data/$(date +%Y-%m-%d)*_Drift.png"  -i /home/dspradio/grc_data/palette.png -lavfi paletteuse /home/dspradio/grc_data/$(date +%Y-%m-%d).gif

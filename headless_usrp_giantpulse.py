@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Headless Usrp Giantpulse
-# Generated: Thu Jul  5 23:56:46 2018
+# Generated: Mon Jul 16 21:45:30 2018
 ##################################################
 
 from datetime import datetime
@@ -23,12 +23,13 @@ import time
 
 class headless_usrp_giantpulse(gr.top_block):
 
-    def __init__(self, fast_integration=0.0005, freq=1.4205e9, giant_prefix="/home/dspradio/giantPulses/", prefix="/home/dspradio/grc_data/", samp_rate=2.5e6, vec_length=1024):
+    def __init__(self, decimation_factor=4, fast_integration=0.0005, freq=1.4205e9, giant_prefix="/home/dspradio/giantPulses/", prefix="/home/dspradio/grc_data/", samp_rate=2.5e6, vec_length=1024):
         gr.top_block.__init__(self, "Headless Usrp Giantpulse")
 
         ##################################################
         # Parameters
         ##################################################
+        self.decimation_factor = decimation_factor
         self.fast_integration = fast_integration
         self.freq = freq
         self.giant_prefix = giant_prefix
@@ -40,8 +41,9 @@ class headless_usrp_giantpulse(gr.top_block):
         # Variables
         ##################################################
         self.sinc_sample_locations = sinc_sample_locations = np.arange(-np.pi*4/2.0, np.pi*4/2.0, np.pi/vec_length)
-        self.timenow = timenow = datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
+        self.timenow = timenow = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
         self.sinc = sinc = np.sinc(sinc_sample_locations/np.pi)
+        self.timeUTC = timeUTC = datetime.utcnow()
         self.recfile = recfile = prefix + timenow + "_Drift.h5"
         self.integration_time = integration_time = 10
         self.giantout_bin = giantout_bin = giant_prefix + timenow + ".bin"
@@ -63,6 +65,8 @@ class headless_usrp_giantpulse(gr.top_block):
         self.uhd_usrp_source_0.set_antenna('TX/RX', 0)
         self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(vec_length, recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
         self.fft_vxx_0 = fft.fft_vcc(vec_length, True, (window.rectangular(vec_length)), True, 1)
+        self.blocks_vector_to_stream_0 = blocks.vector_to_stream(gr.sizeof_float*1, vec_length)
+        self.blocks_stream_to_vector_1 = blocks.stream_to_vector(gr.sizeof_float*1, vec_length/decimation_factor)
         self.blocks_stream_to_vector_0_2 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0_1 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
@@ -72,9 +76,10 @@ class headless_usrp_giantpulse(gr.top_block):
         self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vcc((custom_window[vec_length:2*vec_length]))
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((custom_window[0:vec_length]))
         self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(vec_length)
+        self.blocks_integrate_xx_1 = blocks.integrate_ff(decimation_factor, 1)
         self.blocks_integrate_xx_0_0 = blocks.integrate_ff(int(fast_integration*samp_rate/vec_length), vec_length)
         self.blocks_integrate_xx_0 = blocks.integrate_ff(int((integration_time)*samp_rate/vec_length)/int(fast_integration*samp_rate/vec_length), vec_length)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*vec_length, giantout_bin, False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*vec_length/decimation_factor, giantout_bin, False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_delay_0_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, 3*vec_length)
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, 2*vec_length)
@@ -93,8 +98,9 @@ class headless_usrp_giantpulse(gr.top_block):
         self.connect((self.blocks_delay_0_0_0, 0), (self.blocks_stream_to_vector_0_2, 0))
         self.connect((self.blocks_delay_0_0_0_0, 0), (self.blocks_stream_to_vector_0_1, 0))
         self.connect((self.blocks_integrate_xx_0, 0), (self.radio_astro_hdf5_sink_1, 0))
-        self.connect((self.blocks_integrate_xx_0_0, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.blocks_integrate_xx_0_0, 0), (self.blocks_integrate_xx_0, 0))
+        self.connect((self.blocks_integrate_xx_0_0, 0), (self.blocks_vector_to_stream_0, 0))
+        self.connect((self.blocks_integrate_xx_1, 0), (self.blocks_stream_to_vector_1, 0))
         self.connect((self.blocks_multiply_conjugate_cc_0, 0), (self.blocks_complex_to_real_0_0, 0))
         self.connect((self.blocks_multiply_const_vxx_0, 0), (self.blocks_add_xx_0, 3))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.blocks_add_xx_0, 2))
@@ -104,12 +110,20 @@ class headless_usrp_giantpulse(gr.top_block):
         self.connect((self.blocks_stream_to_vector_0_0, 0), (self.blocks_multiply_const_vxx_0_1, 0))
         self.connect((self.blocks_stream_to_vector_0_1, 0), (self.blocks_multiply_const_vxx_0, 0))
         self.connect((self.blocks_stream_to_vector_0_2, 0), (self.blocks_multiply_const_vxx_0_0, 0))
+        self.connect((self.blocks_stream_to_vector_1, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.blocks_vector_to_stream_0, 0), (self.blocks_integrate_xx_1, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
         self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0, 0))
         self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0_0, 0))
         self.connect((self.uhd_usrp_source_0, 0), (self.blocks_stream_to_vector_0, 0))
+
+    def get_decimation_factor(self):
+        return self.decimation_factor
+
+    def set_decimation_factor(self, decimation_factor):
+        self.decimation_factor = decimation_factor
 
     def get_fast_integration(self):
         return self.fast_integration
@@ -183,6 +197,12 @@ class headless_usrp_giantpulse(gr.top_block):
         self.set_custom_window(self.sinc*np.hamming(4*self.vec_length))
         self.set_sinc(np.sinc(self.sinc_sample_locations/np.pi))
 
+    def get_timeUTC(self):
+        return self.timeUTC
+
+    def set_timeUTC(self, timeUTC):
+        self.timeUTC = timeUTC
+
     def get_recfile(self):
         return self.recfile
 
@@ -216,6 +236,9 @@ class headless_usrp_giantpulse(gr.top_block):
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
+        "", "--decimation-factor", dest="decimation_factor", type="intx", default=4,
+        help="Set decimation_factor [default=%default]")
+    parser.add_option(
         "", "--fast-integration", dest="fast_integration", type="eng_float", default=eng_notation.num_to_str(0.0005),
         help="Set fast_integration [default=%default]")
     parser.add_option(
@@ -240,7 +263,7 @@ def main(top_block_cls=headless_usrp_giantpulse, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(fast_integration=options.fast_integration, freq=options.freq, giant_prefix=options.giant_prefix, prefix=options.prefix, samp_rate=options.samp_rate, vec_length=options.vec_length)
+    tb = top_block_cls(decimation_factor=options.decimation_factor, fast_integration=options.fast_integration, freq=options.freq, giant_prefix=options.giant_prefix, prefix=options.prefix, samp_rate=options.samp_rate, vec_length=options.vec_length)
     tb.start()
     try:
         raw_input('Press Enter to quit: ')

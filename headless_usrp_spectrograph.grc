@@ -248,7 +248,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>datetime.now().strftime("%Y-%m-%d_%H.%M.%S")</value>
+      <value>datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")</value>
     </param>
   </block>
   <block>

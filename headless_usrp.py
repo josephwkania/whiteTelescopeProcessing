@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Headless Usrp
-# Generated: Mon Jul  2 20:30:49 2018
+# Generated: Mon Jul 16 21:46:41 2018
 ##################################################
 
 from datetime import datetime
@@ -39,7 +39,7 @@ class headless_usrp(gr.top_block):
         # Variables
         ##################################################
         self.sinc_sample_locations = sinc_sample_locations = np.arange(-np.pi*4/2.0, np.pi*4/2.0, np.pi/vec_length)
-        self.timenow = timenow = datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
+        self.timenow = timenow = datetime.utcnow().strftime("%Y-%m-%d_%H.%M.%S")
         self.sinc = sinc = np.sinc(sinc_sample_locations/np.pi)
         self.recfile = recfile = prefix + timenow + "_Drift.h5"
         self.integration_time = integration_time = 10

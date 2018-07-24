@@ -10,4 +10,4 @@ source /home/odroid/gnuradio/setup_env.sh
 #python /home/odroid/Documents/dspira-master/grc-flowgraphs/headless_airspy_freqshift.py
 #python /home/odroid/Documents/dspira-master/grc-flowgraphs/headless_usrp_freqshift.py
 
-python /home/odroid/Documents/dspira-master/grc-flowgraphs/cronshell.py
+python /home/odroid/Documents/dspira-master/grc-flowgraphs/main.py

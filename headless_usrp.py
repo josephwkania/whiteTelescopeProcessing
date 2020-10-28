@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Headless Usrp
-# Generated: Sat Aug  4 06:23:46 2018
+# GNU Radio version: 3.7.13.5
 ##################################################
 
 from datetime import datetime
@@ -23,7 +23,7 @@ import time
 
 class headless_usrp(gr.top_block):
 
-    def __init__(self, fast_integration=0.5, freq=1.4205e9, samp_rate=2.5e6, vec_length=2048, prefix="/home/dspradio/grc_data/"):
+    def __init__(self, fast_integration=0.5, freq=1.4205e9, prefix="/home/observer/scratch/", samp_rate=2.5e6, vec_length=2048):
         gr.top_block.__init__(self, "Headless Usrp")
 
         ##################################################
@@ -31,9 +31,9 @@ class headless_usrp(gr.top_block):
         ##################################################
         self.fast_integration = fast_integration
         self.freq = freq
+        self.prefix = prefix
         self.samp_rate = samp_rate
         self.vec_length = vec_length
-        self.prefix = prefix
 
         ##################################################
         # Variables
@@ -48,18 +48,20 @@ class headless_usrp(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.uhd_usrp_source_0 = uhd.usrp_source(
+        self.uhd_usrp_source_1 = uhd.usrp_source(
         	",".join(("", "")),
         	uhd.stream_args(
         		cpu_format="fc32",
         		channels=range(1),
         	),
         )
-        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
-        self.uhd_usrp_source_0.set_center_freq(freq, 0)
-        self.uhd_usrp_source_0.set_gain(35, 0)
-        self.uhd_usrp_source_0.set_antenna('TX/RX', 0)
-        self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(vec_length, recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
+        self.uhd_usrp_source_1.set_samp_rate(samp_rate)
+        self.uhd_usrp_source_1.set_center_freq(freq, 0)
+        self.uhd_usrp_source_1.set_gain(35, 0)
+        self.uhd_usrp_source_1.set_antenna('TX/RX', 0)
+        self.uhd_usrp_source_1.set_auto_dc_offset(True, 0)
+        self.uhd_usrp_source_1.set_auto_iq_balance(True, 0)
+        self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(float, 1, vec_length, "True", recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
         self.fft_vxx_0 = fft.fft_vcc(vec_length, True, (window.rectangular(vec_length)), True, 1)
         self.blocks_stream_to_vector_0_2 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0_1 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
@@ -101,10 +103,10 @@ class headless_usrp(gr.top_block):
         self.connect((self.blocks_stream_to_vector_0_2, 0), (self.blocks_multiply_const_vxx_0_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_stream_to_vector_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_stream_to_vector_0, 0))
 
     def get_fast_integration(self):
         return self.fast_integration
@@ -117,14 +119,21 @@ class headless_usrp(gr.top_block):
 
     def set_freq(self, freq):
         self.freq = freq
-        self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
+        self.uhd_usrp_source_1.set_center_freq(self.freq, 0)
+
+    def get_prefix(self):
+        return self.prefix
+
+    def set_prefix(self, prefix):
+        self.prefix = prefix
+        self.set_recfile(self.prefix + self.timenow + "_Drift.h5")
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.uhd_usrp_source_1.set_samp_rate(self.samp_rate)
 
     def get_vec_length(self):
         return self.vec_length
@@ -140,13 +149,6 @@ class headless_usrp(gr.top_block):
         self.blocks_delay_0_0_0_0.set_dly(3*self.vec_length)
         self.blocks_delay_0_0_0.set_dly(2*self.vec_length)
         self.blocks_delay_0_0.set_dly(self.vec_length)
-
-    def get_prefix(self):
-        return self.prefix
-
-    def set_prefix(self, prefix):
-        self.prefix = prefix
-        self.set_recfile(self.prefix + self.timenow + "_Drift.h5")
 
     def get_sinc_sample_locations(self):
         return self.sinc_sample_locations
@@ -202,14 +204,14 @@ def argument_parser():
         "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(1.4205e9),
         help="Set freq [default=%default]")
     parser.add_option(
+        "", "--prefix", dest="prefix", type="string", default="/home/observer/scratch/",
+        help="Set prefix [default=%default]")
+    parser.add_option(
         "", "--samp-rate", dest="samp_rate", type="eng_float", default=eng_notation.num_to_str(2.5e6),
         help="Set samp_rate [default=%default]")
     parser.add_option(
         "", "--vec-length", dest="vec_length", type="intx", default=2048,
         help="Set vec_length [default=%default]")
-    parser.add_option(
-        "", "--prefix", dest="prefix", type="string", default="/home/dspradio/grc_data/",
-        help="Set prefix [default=%default]")
     return parser
 
 
@@ -217,7 +219,7 @@ def main(top_block_cls=headless_usrp, options=None):
     if options is None:
         options, _ = argument_parser().parse_args()
 
-    tb = top_block_cls(fast_integration=options.fast_integration, freq=options.freq, samp_rate=options.samp_rate, vec_length=options.vec_length, prefix=options.prefix)
+    tb = top_block_cls(fast_integration=options.fast_integration, freq=options.freq, prefix=options.prefix, samp_rate=options.samp_rate, vec_length=options.vec_length)
     tb.start()
     try:
         raw_input('Press Enter to quit: ')

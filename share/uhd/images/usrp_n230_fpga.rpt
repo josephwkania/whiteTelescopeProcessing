@@ -1,13 +1,13 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
--------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
-| Date         : Wed Jan 24 10:34:41 2018
-| Host         : achaudhari-du running 64-bit Ubuntu 16.04.3 LTS
-| Command      : report_utilization -omit_locs -file /home/ashish/git/fpgadev/n3xx_1/usrp3/top/n230/build-N230/build.rpt
+| Date         : Thu Aug 15 17:18:04 2019
+| Host         : mary running 64-bit Ubuntu 15.10
+| Command      : report_utilization -omit_locs -file /home/build-farm/rts_worker/build_FPGA_N230/work/src/usrp3/top/n230/build-N230/build.rpt
 | Design       : n230
 | Device       : 7a100tfgg484-2
 | Design State : Routed
--------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 Utilization Design Information
 
@@ -31,15 +31,15 @@ Table of Contents
 +----------------------------+-------+-----------+-------+
 |          Site Type         |  Used | Available | Util% |
 +----------------------------+-------+-----------+-------+
-| Slice LUTs                 | 31699 |     63400 | 50.00 |
-|   LUT as Logic             | 29513 |     63400 | 46.55 |
-|   LUT as Memory            |  2186 |     19000 | 11.51 |
-|     LUT as Distributed RAM |   514 |           |       |
+| Slice LUTs                 | 31769 |     63400 | 50.11 |
+|   LUT as Logic             | 29759 |     63400 | 46.94 |
+|   LUT as Memory            |  2010 |     19000 | 10.58 |
+|     LUT as Distributed RAM |   338 |           |       |
 |     LUT as Shift Register  |  1672 |           |       |
-| Slice Registers            | 38022 |    126800 | 29.99 |
-|   Register as Flip Flop    | 38022 |    126800 | 29.99 |
+| Slice Registers            | 35934 |    126800 | 28.34 |
+|   Register as Flip Flop    | 35934 |    126800 | 28.34 |
 |   Register as Latch        |     0 |    126800 |  0.00 |
-| F7 Muxes                   |   563 |     31700 |  1.78 |
+| F7 Muxes                   |   523 |     31700 |  1.65 |
 | F8 Muxes                   |    24 |     15850 |  0.15 |
 +----------------------------+-------+-----------+-------+
 
@@ -56,10 +56,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 475   |          Yes |           - |          Set |
-| 2206  |          Yes |           - |        Reset |
-| 689   |          Yes |         Set |            - |
-| 34812 |          Yes |       Reset |            - |
+| 477   |          Yes |           - |          Set |
+| 1762  |          Yes |           - |        Reset |
+| 694   |          Yes |         Set |            - |
+| 33161 |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -69,27 +69,27 @@ Table of Contents
 +-------------------------------------------+-------+-----------+-------+
 |                 Site Type                 |  Used | Available | Util% |
 +-------------------------------------------+-------+-----------+-------+
-| Slice                                     | 11541 |     15850 | 72.81 |
-|   SLICEL                                  |  7859 |           |       |
-|   SLICEM                                  |  3682 |           |       |
-| LUT as Logic                              | 29513 |     63400 | 46.55 |
+| Slice                                     | 11251 |     15850 | 70.98 |
+|   SLICEL                                  |  7722 |           |       |
+|   SLICEM                                  |  3529 |           |       |
+| LUT as Logic                              | 29759 |     63400 | 46.94 |
 |   using O5 output only                    |    86 |           |       |
-|   using O6 output only                    | 24553 |           |       |
-|   using O5 and O6                         |  4874 |           |       |
-| LUT as Memory                             |  2186 |     19000 | 11.51 |
-|   LUT as Distributed RAM                  |   514 |           |       |
+|   using O6 output only                    | 24995 |           |       |
+|   using O5 and O6                         |  4678 |           |       |
+| LUT as Memory                             |  2010 |     19000 | 10.58 |
+|   LUT as Distributed RAM                  |   338 |           |       |
 |     using O5 output only                  |     0 |           |       |
 |     using O6 output only                  |   138 |           |       |
-|     using O5 and O6                       |   376 |           |       |
+|     using O5 and O6                       |   200 |           |       |
 |   LUT as Shift Register                   |  1672 |           |       |
 |     using O5 output only                  |    16 |           |       |
 |     using O6 output only                  |  1480 |           |       |
 |     using O5 and O6                       |   176 |           |       |
-| LUT Flip Flop Pairs                       | 20152 |     63400 | 31.79 |
-|   fully used LUT-FF pairs                 |  1848 |           |       |
-|   LUT-FF pairs with one unused LUT output | 16516 |           |       |
-|   LUT-FF pairs with one unused Flip Flop  | 15778 |           |       |
-| Unique Control Sets                       |   840 |           |       |
+| LUT Flip Flop Pairs                       | 18481 |     63400 | 29.15 |
+|   fully used LUT-FF pairs                 |  1680 |           |       |
+|   LUT-FF pairs with one unused LUT output | 15029 |           |       |
+|   LUT-FF pairs with one unused Flip Flop  | 14169 |           |       |
+| Unique Control Sets                       |   841 |           |       |
 +-------------------------------------------+-------+-----------+-------+
 * Note: Review the Control Sets Report for more information regarding control sets.
 
@@ -100,9 +100,9 @@ Table of Contents
 +-------------------+------+-----------+-------+
 |     Site Type     | Used | Available | Util% |
 +-------------------+------+-----------+-------+
-| Block RAM Tile    |  104 |       135 | 77.04 |
-|   RAMB36/FIFO*    |   96 |       135 | 71.11 |
-|     RAMB36E1 only |   96 |           |       |
+| Block RAM Tile    |  122 |       135 | 90.37 |
+|   RAMB36/FIFO*    |  114 |       135 | 84.44 |
+|     RAMB36E1 only |  114 |           |       |
 |   RAMB18          |   16 |       270 |  5.93 |
 |     RAMB18E1 only |   16 |           |       |
 +-------------------+------+-----------+-------+
@@ -195,25 +195,25 @@ Table of Contents
 +---------------+-------+---------------------+
 |    Ref Name   |  Used | Functional Category |
 +---------------+-------+---------------------+
-| FDRE          | 34812 |        Flop & Latch |
-| LUT3          | 11466 |                 LUT |
-| LUT2          |  6944 |                 LUT |
-| LUT6          |  6873 |                 LUT |
-| LUT4          |  4570 |                 LUT |
-| CARRY4        |  3888 |          CarryLogic |
-| LUT5          |  3484 |                 LUT |
-| FDCE          |  2206 |        Flop & Latch |
+| FDRE          | 33161 |        Flop & Latch |
+| LUT3          | 11048 |                 LUT |
+| LUT6          |  7225 |                 LUT |
+| LUT2          |  7013 |                 LUT |
+| LUT4          |  4683 |                 LUT |
+| CARRY4        |  3944 |          CarryLogic |
+| LUT5          |  3416 |                 LUT |
+| FDCE          |  1762 |        Flop & Latch |
 | SRLC32E       |  1452 |  Distributed Memory |
-| LUT1          |  1050 |                 LUT |
-| FDSE          |   689 |        Flop & Latch |
-| RAMD32        |   564 |  Distributed Memory |
-| MUXF7         |   563 |               MuxFx |
-| FDPE          |   475 |        Flop & Latch |
+| LUT1          |  1052 |                 LUT |
+| FDSE          |   694 |        Flop & Latch |
+| MUXF7         |   523 |               MuxFx |
+| FDPE          |   477 |        Flop & Latch |
 | SRL16E        |   396 |  Distributed Memory |
-| RAMS32        |   326 |  Distributed Memory |
+| RAMD32        |   300 |  Distributed Memory |
+| RAMS32        |   238 |  Distributed Memory |
 | OBUF          |   121 |                  IO |
+| RAMB36E1      |   114 |        Block Memory |
 | IBUF          |    99 |                  IO |
-| RAMB36E1      |    96 |        Block Memory |
 | OBUFT         |    77 |                  IO |
 | DSP48E1       |    71 |    Block Arithmetic |
 | MUXF8         |    24 |               MuxFx |
@@ -254,8 +254,8 @@ Table of Contents
 +---------------------------------+------+
 |             Ref Name            | Used |
 +---------------------------------+------+
-| fifo_short_2clk                 |   10 |
-| fifo_4k_2clk                    |    4 |
+| fifo_4k_2clk                    |    8 |
+| fifo_short_2clk                 |    6 |
 | axi64_8k_2clk_fifo              |    4 |
 | jesd_phy                        |    2 |
 | gige_phy                        |    2 |
@@ -269,15 +269,15 @@ Table of Contents
 
 
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
---------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.4 (lin64) Build 2086221 Fri Dec 15 20:54:30 MST 2017
-| Date         : Wed Jan 24 10:34:44 2018
-| Host         : achaudhari-du running 64-bit Ubuntu 16.04.3 LTS
-| Command      : report_timing_summary -no_detailed_paths -file /home/ashish/git/fpgadev/n3xx_1/usrp3/top/n230/build-N230/build.rpt -append
+| Date         : Thu Aug 15 17:18:06 2019
+| Host         : mary running 64-bit Ubuntu 15.10
+| Command      : report_timing_summary -no_detailed_paths -file /home/build-farm/rts_worker/build_FPGA_N230/work/src/usrp3/top/n230/build-N230/build.rpt -append
 | Design       : n230
 | Device       : 7a100t-fgg484
 | Speed File   : -2  PRODUCTION 1.20 2017-11-01
---------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Timing Summary Report
 
@@ -396,7 +396,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      0.065        0.000                      0               104963        0.014        0.000                      0               104907        0.264        0.000                       0                 41305  
+      0.065        0.000                      0                99637        0.014        0.000                      0                99565        0.264        0.000                       0                 38901  
 
 
 All user specified timing constraints are met.
@@ -449,20 +449,20 @@ quad_phy_i/jesd204_phy_i1/inst/jesd_phy_gt/inst/jesd_phy_gt_i/gt0_jesd_phy_gt_i/
 Clock                                                                                                          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----                                                                                                          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 CODEC_DATA_CLK                                                                                                                                                                                                                                               3.529        0.000                       0                    24  
-  sdr_clk                                                                                                        6.753        0.000                      0                67082        0.040        0.000                      0                67082        8.870        0.000                       0                 26768  
-ETH_CLK                                                                                                          4.410        0.000                      0                  339        0.139        0.000                      0                  339        2.286        0.000                       0                   238  
+  sdr_clk                                                                                                        5.501        0.000                      0                64301        0.025        0.000                      0                64301        8.870        0.000                       0                 25614  
+ETH_CLK                                                                                                          4.733        0.000                      0                  339        0.173        0.000                      0                  339        2.286        0.000                       0                   238  
 bus_clk_gen_i/inst/clk_in_40mhz                                                                                                                                                                                                                              7.500        0.000                       0                     1  
-  bus_clk                                                                                                        1.993        0.000                      0                25125        0.033        0.000                      0                25125        2.500        0.000                       0                  9852  
+  bus_clk                                                                                                        1.396        0.000                      0                23651        0.051        0.000                      0                23651        2.500        0.000                       0                  8708  
   clk100                                                                                                                                                                                                                                                     3.000        0.000                       0                     4  
     jesd_core_clk_mmcm                                                                                                                                                                                                                                       3.940        0.000                       0                     7  
     jesd_user_clk_mmcm                                                                                                                                                                                                                                       1.970        0.000                       0                     6  
   clk200                                                                                                                                                                                                                                                     0.264        0.000                       0                     3  
   clkfbout_bus_clk_gen                                                                                                                                                                                                                                      23.408        0.000                       0                     3  
   ram_io_clk                                                                                                                                                                                                                                                 6.741        0.000                       0                     3  
-  ram_ui_clk                                                                                                     1.716        0.000                      0                 5438        0.074        0.000                      0                 5438        3.037        0.000                       0                  2169  
+  ram_ui_clk                                                                                                     1.717        0.000                      0                 4407        0.076        0.000                      0                 4407        3.037        0.000                       0                  2003  
 quad_phy_i/gig_phy_i0/inst/transceiver_inst/gtwizard_inst/inst/gtwizard_i/gt0_GTWIZARD_i/gtpe2_i/TXOUTCLK                                                                                                                                                    5.000        0.000                       0                     3  
-  eth_mmcm_clkout0                                                                                               2.522        0.000                      0                 3898        0.034        0.000                      0                 3898        3.146        0.000                       0                  1976  
-  eth_mmcm_clkout1                                                                                              12.266        0.000                      0                  312        0.117        0.000                      0                  312        7.500        0.000                       0                   246  
+  eth_mmcm_clkout0                                                                                               2.803        0.000                      0                 4286        0.075        0.000                      0                 4286        3.146        0.000                       0                  2036  
+  eth_mmcm_clkout1                                                                                              12.374        0.000                      0                  312        0.123        0.000                      0                  312        7.500        0.000                       0                   246  
   eth_mmcm_fbclk                                                                                                                                                                                                                                            14.751        0.000                       0                     2  
 
 
@@ -474,12 +474,12 @@ quad_phy_i/gig_phy_i0/inst/transceiver_inst/gtwizard_inst/inst/gtwizard_i/gt0_GT
 From Clock        To Clock              WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
 ----------        --------              -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
 CODEC_CLK         CODEC_DATA_CLK          0.065        0.000                      0                    7        0.014        0.000                      0                    7  
-ram_ui_clk        bus_clk                 7.202        0.000                      0                   28                                                                        
-ram_ui_clk        RAM_CLK                 1.430        0.000                      0                   56        1.017        0.000                      0                   56  
-bus_clk           ram_ui_clk              1.533        0.000                      0                   33        0.269        0.000                      0                    5  
+ram_ui_clk        bus_clk                 7.133        0.000                      0                   36                                                                        
+ram_ui_clk        RAM_CLK                 1.377        0.000                      0                   56        1.017        0.000                      0                   56  
+bus_clk           ram_ui_clk              1.485        0.000                      0                   41        0.231        0.000                      0                    5  
 RAM_CLK           ram_ui_clk              0.391        0.000                      0                   36        0.351        0.000                      0                   36  
-eth_mmcm_clkout1  eth_mmcm_clkout0        5.703        0.000                      0                   56        0.114        0.000                      0                   56  
-eth_mmcm_clkout0  eth_mmcm_clkout1        5.650        0.000                      0                   48        0.151        0.000                      0                   48  
+eth_mmcm_clkout1  eth_mmcm_clkout0        5.708        0.000                      0                   56        0.138        0.000                      0                   56  
+eth_mmcm_clkout0  eth_mmcm_clkout1        5.720        0.000                      0                   48        0.125        0.000                      0                   48  
 
 
 ------------------------------------------------------------------------------------------------
@@ -489,10 +489,10 @@ eth_mmcm_clkout0  eth_mmcm_clkout1        5.650        0.000                    
 
 Path Group         From Clock         To Clock               WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
 ----------         ----------         --------               -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
-**async_default**  ETH_CLK            ETH_CLK                  5.779        0.000                      0                   94        0.409        0.000                      0                   94  
-**async_default**  bus_clk            bus_clk                  6.005        0.000                      0                 1556        0.309        0.000                      0                 1556  
-**async_default**  eth_mmcm_clkout0   eth_mmcm_clkout0         5.839        0.000                      0                    4        0.491        0.000                      0                    4  
-**async_default**  ram_ui_clk         ram_ui_clk               5.432        0.000                      0                  327        0.285        0.000                      0                  327  
-**async_default**  sdr_clk            sdr_clk                 15.444        0.000                      0                  524        0.341        0.000                      0                  524  
+**async_default**  ETH_CLK            ETH_CLK                  6.074        0.000                      0                   94        0.376        0.000                      0                   94  
+**async_default**  bus_clk            bus_clk                  6.346        0.000                      0                 1064        0.279        0.000                      0                 1064  
+**async_default**  eth_mmcm_clkout0   eth_mmcm_clkout0         5.622        0.000                      0                    4        0.647        0.000                      0                    4  
+**async_default**  ram_ui_clk         ram_ui_clk               4.362        0.000                      0                  351        0.319        0.000                      0                  351  
+**async_default**  sdr_clk            sdr_clk                 16.328        0.000                      0                  548        0.366        0.000                      0                  548  
 
 

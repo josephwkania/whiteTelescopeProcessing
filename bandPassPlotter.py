@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python2
 """Created by jwk june 2018"""
 import matplotlib
 matplotlib.use('Agg')#need to use Agg for non-gui printing
@@ -28,14 +28,14 @@ class bandPassPlotter(object):
             fileOne = True
         except:
             fileOne = False
-            print("Didn't find fileOne!")
+            print("Didn't find fileOne: {0}".format(self.options["fileOne"]))
         try:
             switch = h5py.File(self.options["fileTwo"],'r')
             spectrum2 = switch['spectrum'][:].mean(axis=0)
             fileTwo = True
         except:
             fileTwo = False
-            print("Didn't find fileTwo!")
+            print("Didn't find fileTwo: {0}".format(self.options["fileTwo"]))
             
         if not fileOne and not fileTwo:
             print("Files are not there or are empty")
@@ -76,7 +76,8 @@ class bandPassPlotter(object):
         ax1.get_xaxis().get_major_formatter().set_useOffset(False)#makes plt print out full axis
         ax2.set_xlabel('km/s (w/ cntr={0}MHz)'.format(self.options["freqOne"]/10.0**6.0))
         ax1.set_ylabel('Counts')
-        new_tick_locations = np.array([1420.0, 1420.25, 1420.4, 1420.5, 1420.75, 1421.0])
+        #new_tick_locations = np.array([1420.0, 1420.25, 1420.4, 1420.5, 1420.75, 1421.0])
+        new_tick_locations = np.array([1410.0, 1415.0, 1420.0, 1420.4, 1425.0, 1430.0, 1435.0])
         ax2.set_xticks(new_tick_locations)
         ax2.set_xticklabels(tick_function(new_tick_locations))
         plt.title("{0}, l={1:.1f}, b={2:.1f}".format(self.options["fileOne"].split('/')[-1], self.options["pointingGalacticL"], \
@@ -90,10 +91,10 @@ class bandPassPlotter(object):
 
         #plt.plot(freq,spectrum.mean(axis=0), freq, spectrum2.mean(axis=0), freq, diff.mean(axis=0))
 
-        ax1.set_xlim(xmin=1419.5,xmax=1421.5)
+        #ax1.set_xlim(xmin=1419.5,xmax=1421.5)
         if self.switch:
             #ax1.set_ylim([-14000,60000])#airspy
-            ax1.set_ylim([-15,90])#USRP
+            #ax1.set_ylim([-15,90])#USRP
             ##plt.plot(freq,spectrum.mean(axis=0), label="Cntr1420.5MHz")
             ##plt.plot(freq, spectrum2.mean(axis=0),label="Cntr1420.2MHz")
             ##plt.plot(freq, diff.mean(axis=0),label="1420.5-1420.2")
@@ -121,10 +122,10 @@ class bandPassPlotter(object):
             endIndex = int(maxLocation+self.options["trackingBoxWidth"]/2.0*self.options["vecLength"]/self.options["sampleRate"])
             if startIndex < 0:#incase the box is at the end
                 startIndex = 0
-                endIndex = self.options["trackingBoxWidth"]/self.options["vecLength"]/self.options["sampleRate"]
+                endIndex = int(self.options["trackingBoxWidth"]/self.options["vecLength"]/self.options["sampleRate"])
             if endIndex > len(trimmedDiff) - 1:
                 endIndex = len(trimmedDiff) - 1
-                startIndex = endIndex - self.options["trackingBoxWidth"]/self.options["vecLength"]/self.options["sampleRate"]
+                startIndex = int(endIndex - self.options["trackingBoxWidth"]/self.options["vecLength"]/self.options["sampleRate"])
             plt.axvline(x=trimmedFreq[startIndex])#plot the boundries of the box
             plt.axvline(x=trimmedFreq[endIndex])
             cleanedFlux = np.sum(trimmedSpectrum) - np.sum(trimmedDiff[startIndex:endIndex])

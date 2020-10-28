@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.12'?>
+<?grc format='1' created='3.7.13'?>
 <flow_graph>
   <timestamp>Thu Jan 19 12:15:45 2017</timestamp>
   <block>
@@ -221,7 +221,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>"/home/dspradio/freq_shifts/"</value>
+      <value>"/home/observer/scratch/freq_shifts"</value>
     </param>
   </block>
   <block>
@@ -504,7 +504,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(320, 180)</value>
+      <value>(304, 180)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1354,6 +1354,10 @@
       <value>radio_astro_hdf5_sink_1</value>
     </param>
     <param>
+      <key>type</key>
+      <value>float</value>
+    </param>
+    <param>
       <key>fname</key>
       <value>recfile</value>
     </param>
@@ -1366,12 +1370,20 @@
       <value>samp_rate/vec_length</value>
     </param>
     <param>
+      <key>n_inputs</key>
+      <value>1</value>
+    </param>
+    <param>
       <key>notes</key>
       <value>amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10</value>
     </param>
     <param>
       <key>pointing</key>
       <value>A180E55</value>
+    </param>
+    <param>
+      <key>save_toggle</key>
+      <value>"True"</value>
     </param>
     <param>
       <key>vec_length</key>
@@ -1398,11 +1410,11 @@
     </param>
     <param>
       <key>dc_offs_enb0</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb0</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain0</key>
@@ -1434,11 +1446,11 @@
     </param>
     <param>
       <key>dc_offs_enb10</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb10</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain10</key>
@@ -1470,11 +1482,11 @@
     </param>
     <param>
       <key>dc_offs_enb11</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb11</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain11</key>
@@ -1506,11 +1518,11 @@
     </param>
     <param>
       <key>dc_offs_enb12</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb12</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain12</key>
@@ -1542,11 +1554,11 @@
     </param>
     <param>
       <key>dc_offs_enb13</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb13</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain13</key>
@@ -1578,11 +1590,11 @@
     </param>
     <param>
       <key>dc_offs_enb14</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb14</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain14</key>
@@ -1614,11 +1626,11 @@
     </param>
     <param>
       <key>dc_offs_enb15</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb15</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain15</key>
@@ -1650,11 +1662,11 @@
     </param>
     <param>
       <key>dc_offs_enb16</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb16</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain16</key>
@@ -1686,11 +1698,11 @@
     </param>
     <param>
       <key>dc_offs_enb17</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb17</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain17</key>
@@ -1722,11 +1734,11 @@
     </param>
     <param>
       <key>dc_offs_enb18</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb18</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain18</key>
@@ -1758,11 +1770,11 @@
     </param>
     <param>
       <key>dc_offs_enb19</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb19</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain19</key>
@@ -1794,11 +1806,11 @@
     </param>
     <param>
       <key>dc_offs_enb1</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb1</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain1</key>
@@ -1830,11 +1842,11 @@
     </param>
     <param>
       <key>dc_offs_enb20</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb20</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain20</key>
@@ -1866,11 +1878,11 @@
     </param>
     <param>
       <key>dc_offs_enb21</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb21</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain21</key>
@@ -1902,11 +1914,11 @@
     </param>
     <param>
       <key>dc_offs_enb22</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb22</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain22</key>
@@ -1938,11 +1950,11 @@
     </param>
     <param>
       <key>dc_offs_enb23</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb23</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain23</key>
@@ -1974,11 +1986,11 @@
     </param>
     <param>
       <key>dc_offs_enb24</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb24</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain24</key>
@@ -2010,11 +2022,11 @@
     </param>
     <param>
       <key>dc_offs_enb25</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb25</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain25</key>
@@ -2046,11 +2058,11 @@
     </param>
     <param>
       <key>dc_offs_enb26</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb26</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain26</key>
@@ -2082,11 +2094,11 @@
     </param>
     <param>
       <key>dc_offs_enb27</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb27</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain27</key>
@@ -2118,11 +2130,11 @@
     </param>
     <param>
       <key>dc_offs_enb28</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb28</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain28</key>
@@ -2154,11 +2166,11 @@
     </param>
     <param>
       <key>dc_offs_enb29</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb29</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain29</key>
@@ -2190,11 +2202,11 @@
     </param>
     <param>
       <key>dc_offs_enb2</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb2</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain2</key>
@@ -2226,11 +2238,11 @@
     </param>
     <param>
       <key>dc_offs_enb30</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb30</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain30</key>
@@ -2262,11 +2274,11 @@
     </param>
     <param>
       <key>dc_offs_enb31</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb31</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain31</key>
@@ -2298,11 +2310,11 @@
     </param>
     <param>
       <key>dc_offs_enb3</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb3</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain3</key>
@@ -2334,11 +2346,11 @@
     </param>
     <param>
       <key>dc_offs_enb4</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb4</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain4</key>
@@ -2370,11 +2382,11 @@
     </param>
     <param>
       <key>dc_offs_enb5</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb5</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain5</key>
@@ -2406,11 +2418,11 @@
     </param>
     <param>
       <key>dc_offs_enb6</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb6</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain6</key>
@@ -2442,11 +2454,11 @@
     </param>
     <param>
       <key>dc_offs_enb7</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb7</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain7</key>
@@ -2478,11 +2490,11 @@
     </param>
     <param>
       <key>dc_offs_enb8</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb8</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain8</key>
@@ -2514,11 +2526,11 @@
     </param>
     <param>
       <key>dc_offs_enb9</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>iq_imbal_enb9</key>
-      <value>""</value>
+      <value>True</value>
     </param>
     <param>
       <key>norm_gain9</key>
@@ -2562,7 +2574,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(32, 248)</value>
+      <value>(40, 212)</value>
     </param>
     <param>
       <key>_rotation</key>

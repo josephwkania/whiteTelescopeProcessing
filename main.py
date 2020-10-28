@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python2
 import sys, time, os, datetime, argparse, getpass
 from astropy import units as u
 from astropy.time import Time
@@ -13,7 +13,8 @@ class whiteTelescope(object):
         
     def takeData(self):
         self.options["UTC"] = datetime.datetime.utcnow().strftime('%Y-%m-%d')
-        base  = self.options["dirRoot"] + getpass.getuser() + "/" + self.options["source"] + "/" + self.options["UTC"]
+        base  = self.options["dirRoot"] + "/"+ self.options["mode"] + "/" + self.options["source"] \
+                + "/" + self.options["UTC"]
         self.options["folderOne"] = base + "/freqOne/"#this is were the programs puts files
         self.options["folderTwo"] = base + "/freqTwo/"
         self.options["folderGiant"] = base + "/giantPulses/"
@@ -21,6 +22,8 @@ class whiteTelescope(object):
         self.options["folderImage"] = base + "/images/"
         
         if not os.path.exists(self.options["folderOne"]):#check to see if folder exists, if not create it
+            if self.options["verbose"]:
+                print("No folder at {0}, making folder".format(self.options["folderOne"]))
             os.makedirs(self.options["folderOne"])
         if not os.path.exists(self.options["folderTwo"]):
             os.makedirs(self.options["folderTwo"])
@@ -34,8 +37,8 @@ class whiteTelescope(object):
         logFileName = base+"/"+ self.options["UTC"]+".log"
         print("Hello {0}, check {1} for your log file.".format(getpass.getuser(), logFileName))
         log = open(logFileName, "a")#dump the stout to this file
-        sys.stdout = log
-        sys.stderr = log
+        #sys.stdout = log
+        #sys.stderr = log
         
         self.options["fast_integrationNoPulse"] = 0.5 #when fast integration is not tapped [ie not used], in seconds  
         t = Time(datetime.datetime.utcnow())
@@ -60,9 +63,10 @@ class whiteTelescope(object):
         print("Telescope Dec={0}".format(self.options["telescopeDEC"]))
         print("Telescope RAJ={0}".format(self.options["telescopeRA"]))
 
-        os.chdir("/home/odroid/gnuradio/lib/uhd/utils/share/uhd/images")#need to be in this directory for the ettus board to run
+        #os.chdir("/home/odroid/gnuradio/lib/uhd/utils/share/uhd/images")#need to be in this directory for the ettus board to run
+        #os.chdir("/home/observer/whiteTelescopeProcessing/share/uhd/images")
         try:
-            if separationNow < self.options["separationLimit"]:
+            if True:#separationNow < self.options["separationLimit"]:
                 import headless_usrp_giantpulse
                 #from singlePulsePlotter import singlePulsePlotter
                 tb1 = headless_usrp_giantpulse.headless_usrp_giantpulse(fast_integration=self.options["fast_integrationPulse"], \
@@ -107,7 +111,8 @@ class whiteTelescope(object):
             self.options["fileOne"] = tb1.recfile
             self.options["timeNow"] = tb1.timenow
                 
-        except:
+        except Exception as e:
+            print("Caught Exeption:{0}".format(e))
             print("freqOne Failed!, trying freqTwo.")
             self.options["fileOne"] = ""
             time.sleep(10)#wait 10second to make sure usrp is done
@@ -115,7 +120,7 @@ class whiteTelescope(object):
         time.sleep(self.options["waitTime"])#wait for USRP to stop talking data
 
         try:
-            if separationNow < self.options["separationLimit"]:
+            if True:#separationNow < self.options["separationLimit"]:
                 tb2 =  headless_usrp_giantpulse.headless_usrp_giantpulse(fast_integration=self.options["fast_integrationPulse"],\
                                                                          prefix=self.options["folderTwo"], \
                                                                          samp_rate=self.options["sampleRate"],\
@@ -142,7 +147,7 @@ class whiteTelescope(object):
                 spdic["foff"] =  float(self.options["sampleRate"]/(self.options["vecLength"]/self.options["decimationFactor"]*10.0**6.0))
                 spdic["tsamp"] = float(self.options["fast_integrationPulse"])
                 spdic["tstart"] = float(Time(tb2.timeUTC).mjd)
-    
+                
                 filterbank2 = fb.create_filterbank_file(tb2.giantout_bin.split('.bin')[0]+".fil", header=spdic, nbits=32)
                 filterbank2.close()
                 command2 = '/bin/cat ' +  tb2.giantout_bin + ' >> ' +  tb2.giantout_bin.split('.bin')[0]+".fil"
@@ -151,8 +156,8 @@ class whiteTelescope(object):
                 fbmaker2.wait()
                 remover2 = Popen('rm ' + tb2.giantout_bin, stdout=PIPE, shell=True)
                 #output2=remover2.communicate()[0]
-                mover2 = Popen('rsync -ah --remove-source-files '+tb2.giantout_bin.split('.bin')[0]+".fil " +\
-                               'bowser:/hyrule/data/users/jwkania/odroid/giantPulses/',stdout=PIPE, shell=True)
+                #mover2 = Popen('rsync -ah --remove-source-files '+tb2.giantout_bin.split('.bin')[0]+".fil " +\
+                #               'bowser:/hyrule/data/users/jwkania/odroid/giantPulses/',stdout=PIPE, shell=True)
                 #output = mover2.communicate()[0]
                 
                 #moved here in hopes it doesn't mess with the sdr timing
@@ -163,8 +168,8 @@ class whiteTelescope(object):
                 remover = Popen('rm '+ tb1.giantout_bin, stdout=PIPE, shell=True)
                 #output=remover.communicate()[0]
                 #remover.wait()
-                mover = Popen('rsync -ah --remove-source-files '+tb1.giantout_bin.split('.bin')[0]+".fil " +\
-                              ' bowser:/hyrule/data/users/jwkania/odroid/giantPulses/', stdout=PIPE, shell=True)
+                #mover = Popen('rsync -ah --remove-source-files '+tb1.giantout_bin.split('.bin')[0]+".fil " +\
+                #              ' bowser:/hyrule/data/users/jwkania/odroid/giantPulses/', stdout=PIPE, shell=True)
                 #output = mover.communicate()[0]
             
             else:
@@ -175,13 +180,14 @@ class whiteTelescope(object):
                 time.sleep(self.options["integrationTime"])
                 tb2.stop()
                 tb2.wait()
-
+                
             self.options["fileTwo"] = tb2.recfile
                 
-        except:
+        except Exception as e:
+            print("Caught Exeption:{0}".format(e))
             print("freqTwo failed!")
             self.options["fileTwo"] = ""
-            
+        
         bandPassPlotter(**self.options)
 
         #movie = Popen("/bin/bash /home/odroid/Documents/dspira-master/grc-flowgraphs/movieMaker.sh", shell=True, stdin=None,\
@@ -213,13 +219,13 @@ if __name__ == "__main__":
     semi_opt.add_argument('--freqTwo', type=float,
                            help="second frequency for frequency switiching", default=1.4200e9)
     semi_opt.add_argument('--sampleRate', type=float,
-                           help="Rate which the USRP samples", default=3.0e6)
+                           help="Rate which the USRP samples", default=40.0e6)
     semi_opt.add_argument('--vecLength', type=int,
                            help="Length of FFT", default=1024)
     semi_opt.add_argument('--decimationFactor', type=int,
                            help="Factor to reduce spectral resolution for pulse mode", default=4)
     semi_opt.add_argument('--dirRoot', type=str,
-                          help="Base of the direcotry to put the files.", default="/home/usrs/")
+                          help="Base of the directory to put the files.", default="{0}/scratch".format(os.path.expanduser("~")))
     
     #-----Below this line will be change to requard arguments in future versions-----#
     semi_opt.add_argument('--source', type=str,
@@ -230,6 +236,8 @@ if __name__ == "__main__":
     #                       help="Folder to put second frequency.", default="/home/dspradio/freq_shifts/")
     #semi_opt.add_argument('--folderGiant', type=str,
     #                       help="Folder to put pulses.", default="/home/dspradio/giantPulses/")
+    semi_opt.add_argument('--mode', type=str,
+                          help="pulsar or coninuum", default="continuum")
     semi_opt.add_argument('--telescopeAZ', type=float,
                            help="Telescope azimuth", default=180.0)
     semi_opt.add_argument('--telescopeALT', type=float,
@@ -238,5 +246,10 @@ if __name__ == "__main__":
                            help="Target's Right Ascension", default="05h43m32s")
     semi_opt.add_argument('--targetDEC', type=str,
                            help="Target's Declination", default="22d00m52s")
+
+    optional=parser.add_argument_group('other optional arguments:')
+    optional.add_argument('-v','--verbose',help="verbose analysis",
+                          action="store_true")
+    
     args = vars(parser.parse_args())
     whiteTelescope(**args)

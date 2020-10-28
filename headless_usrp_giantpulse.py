@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Headless Usrp Giantpulse
-# Generated: Mon Jul 16 21:45:30 2018
+# GNU Radio version: 3.7.13.5
 ##################################################
 
 from datetime import datetime
@@ -52,18 +52,21 @@ class headless_usrp_giantpulse(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.uhd_usrp_source_0 = uhd.usrp_source(
+        self.uhd_usrp_source_1 = uhd.usrp_source(
         	",".join(("", "")),
         	uhd.stream_args(
         		cpu_format="fc32",
         		channels=range(1),
         	),
         )
-        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
-        self.uhd_usrp_source_0.set_center_freq(freq, 0)
-        self.uhd_usrp_source_0.set_gain(35, 0)
-        self.uhd_usrp_source_0.set_antenna('TX/RX', 0)
-        self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(vec_length, recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
+        self.uhd_usrp_source_1.set_samp_rate(samp_rate)
+        self.uhd_usrp_source_1.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
+        self.uhd_usrp_source_1.set_center_freq(freq, 0)
+        self.uhd_usrp_source_1.set_gain(35, 0)
+        self.uhd_usrp_source_1.set_antenna('TX/RX', 0)
+        self.uhd_usrp_source_1.set_auto_dc_offset(True, 0)
+        self.uhd_usrp_source_1.set_auto_iq_balance(True, 0)
+        self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(float, 1, vec_length, "True", recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
         self.fft_vxx_0 = fft.fft_vcc(vec_length, True, (window.rectangular(vec_length)), True, 1)
         self.blocks_vector_to_stream_0 = blocks.vector_to_stream(gr.sizeof_float*1, vec_length)
         self.blocks_stream_to_vector_1 = blocks.stream_to_vector(gr.sizeof_float*1, vec_length/decimation_factor)
@@ -114,10 +117,10 @@ class headless_usrp_giantpulse(gr.top_block):
         self.connect((self.blocks_vector_to_stream_0, 0), (self.blocks_integrate_xx_1, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_delay_0_0_0_0, 0))
-        self.connect((self.uhd_usrp_source_0, 0), (self.blocks_stream_to_vector_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0_0, 0))
+        self.connect((self.uhd_usrp_source_1, 0), (self.blocks_stream_to_vector_0, 0))
 
     def get_decimation_factor(self):
         return self.decimation_factor
@@ -136,7 +139,7 @@ class headless_usrp_giantpulse(gr.top_block):
 
     def set_freq(self, freq):
         self.freq = freq
-        self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
+        self.uhd_usrp_source_1.set_center_freq(self.freq, 0)
 
     def get_giant_prefix(self):
         return self.giant_prefix
@@ -157,7 +160,7 @@ class headless_usrp_giantpulse(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.uhd_usrp_source_1.set_samp_rate(self.samp_rate)
 
     def get_vec_length(self):
         return self.vec_length

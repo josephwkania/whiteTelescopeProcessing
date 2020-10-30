@@ -98,6 +98,8 @@ class whiteTelescope(object):
                 spdic["tstart"] = float(Time(tb1.timeUTC).mjd)
                 filterbank = fb.create_filterbank_file(tb1.giantout_bin.split('.bin')[0]+".fil", header=spdic, nbits=32)
                 filterbank.close()
+
+                print('\nFinished First Frequency')
                 
             else:
                 import headless_usrp
@@ -108,6 +110,9 @@ class whiteTelescope(object):
                 time.sleep(self.options["integrationTime"])
                 tb1.stop()
                 tb1.wait()
+
+                print('Finished First Frequency')
+
             self.options["fileOne"] = tb1.recfile
             self.options["timeNow"] = tb1.timenow
                 
@@ -150,6 +155,9 @@ class whiteTelescope(object):
                 
                 filterbank2 = fb.create_filterbank_file(tb2.giantout_bin.split('.bin')[0]+".fil", header=spdic, nbits=32)
                 filterbank2.close()
+
+                print('\nFinished Second Frequency')
+                
                 command2 = '/bin/cat ' +  tb2.giantout_bin + ' >> ' +  tb2.giantout_bin.split('.bin')[0]+".fil"
                 fbmaker2 = Popen(command2, stdout=PIPE, shell=True)
                 output2=fbmaker2.communicate()[0]
@@ -181,6 +189,8 @@ class whiteTelescope(object):
                 tb2.stop()
                 tb2.wait()
                 
+                print('\nFinished Second Frequency')
+
             self.options["fileTwo"] = tb2.recfile
                 
         except Exception as e:
@@ -195,8 +205,8 @@ class whiteTelescope(object):
         #output=movie.communicate()[0]
         
         for i in self.options:
-            print("{0} \t {1}".format(i, self.options[i]))
-        print("\n\n")
+            print("{0: >23}:\t {1}".format(i, self.options[i]))
+        print('')# nice spacing
         log.close#close log file
         
 if __name__ == "__main__":

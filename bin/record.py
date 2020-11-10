@@ -1,9 +1,10 @@
 #!/usr/bin/env python2
+
 import sys, time, os, datetime, argparse, getpass
 from astropy import units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
-from bandPassPlotter import bandPassPlotter
+from white_radio import bandPassPlotter
 from subprocess import Popen, PIPE
 
 class whiteTelescope(object):
@@ -67,7 +68,7 @@ class whiteTelescope(object):
         #os.chdir("/home/observer/whiteTelescopeProcessing/share/uhd/images")
         try:
             if True:#separationNow < self.options["separationLimit"]:
-                import headless_usrp_giantpulse
+                from white_radio import headless_usrp_giantpulse
                 #from singlePulsePlotter import singlePulsePlotter
                 tb1 = headless_usrp_giantpulse.headless_usrp_giantpulse(fast_integration=self.options["fast_integrationPulse"], \
                                                                         prefix=self.options["folderOne"], samp_rate=self.options["sampleRate"],\
@@ -102,7 +103,7 @@ class whiteTelescope(object):
                 print('\nFinished First Frequency')
                 
             else:
-                import headless_usrp
+                from white_radio import headless_usrp
                 tb1 = headless_usrp.headless_usrp(fast_integration=self.options["fast_integrationNoPulse"], prefix=self.options["folderOne"],\
                                                   samp_rate=self.options["sampleRate"], vec_length=self.options["vecLength"],\
                                                   freq=self.options["freqOne"])
@@ -198,21 +199,21 @@ class whiteTelescope(object):
             print("freqTwo failed!")
             self.options["fileTwo"] = ""
         
-        bandPassPlotter(**self.options)
+        bandPassPlotter.bandPassPlotter(**self.options)
 
         #movie = Popen("/bin/bash /home/odroid/Documents/dspira-master/grc-flowgraphs/movieMaker.sh", shell=True, stdin=None,\
         #               stdout=None, stderr=None)
         #output=movie.communicate()[0]
         
         for i in self.options:
-            print("{0: >23}:\t {1}".format(i, self.options[i]))
+            print("{0: >23}:\t{1}".format(i, self.options[i]))
         print('')# nice spacing
         log.close#close log file
         
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(
         description="White Telescope Controller",
-        prog='main.py',
+        prog='record.py',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     semi_opt = parser.add_argument_group('required arguments [test defaults given].')

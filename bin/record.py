@@ -81,7 +81,7 @@ class whiteTelescope(object):
                 tb1.stop()
                 tb1.wait()
                 
-                import filterbank as fb
+                from white_radio import filterbank as fb
                 spdic = {}
                 spdic["telescope_id"] = int(0)
                 spdic["macnine_id"] = int(0)

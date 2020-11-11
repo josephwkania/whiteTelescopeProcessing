@@ -1,3 +1,6 @@
+import headless_airspy
+import time
+
 def main(top_block_cls=headless_airspy, options=None):
 
     tb = top_block_cls()

@@ -3,7 +3,7 @@ import re
 from setuptools import setup, find_packages
 
 
-#with open("requirements.txt") as f:
+# with open("requirements.txt") as f:
 #    required = f.read().splitlines()
 
 with open("README.md", "r") as f:
@@ -21,8 +21,8 @@ setup(
     url="https://github.com/thepetabyteproject/your",
     author="Devansh Agarwal, Kshitij Aggarwal",
     scripts=glob.glob("bin/*"),
-    #tests_require=["pytest", "pytest-cov"],
-    #install_requires=required,
+    # tests_require=["pytest", "pytest-cov"],
+    # install_requires=required,
     long_description=long_description,
     long_description_content_type="text/markdown",
     author_email="da0017@mix.wvu.edu, ka0064@mix.wvu.edu",

@@ -1,9 +1,13 @@
 #!/usr/bin/env python2
 """Created by jwk june 2018"""
-import matplotlib
 
+import matplotlib
 matplotlib.use("Agg")  # need to use Agg for non-gui printing
-import h5py, csv, sys, argparse, imageio
+import h5py
+import csv
+import sys 
+import argparse
+import imageio
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit

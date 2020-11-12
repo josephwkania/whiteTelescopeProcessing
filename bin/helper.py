@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """Created by jwk aug 2018"""
-import main, getpass
+import getpass
 
 
 class obsHelper(object):

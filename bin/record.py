@@ -1,6 +1,10 @@
 #!/usr/bin/env python2
 
-import sys, time, os, datetime, argparse, getpass
+import time
+import os
+import datetime
+import argparse
+import getpass
 from astropy import units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
@@ -107,7 +111,8 @@ class whiteTelescope(object):
         print("Telescope Dec={0}".format(self.options["telescopeDEC"]))
         print("Telescope RAJ={0}".format(self.options["telescopeRA"]))
 
-        # os.chdir("/home/odroid/gnuradio/lib/uhd/utils/share/uhd/images")#need to be in this directory for the ettus board to run
+        # os.chdir("/home/odroid/gnuradio/lib/uhd/utils/share/uhd/images")
+        # need to be in this directory for the ettus board to run
         # os.chdir("/home/observer/whiteTelescopeProcessing/share/uhd/images")
         try:
             if True:  # separationNow < self.options["separationLimit"]:

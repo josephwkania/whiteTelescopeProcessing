@@ -25,7 +25,7 @@ class obsHelper(object):
 
         while True:
             try:
-                coordSys = raw_input(
+                coordSys = input(
                     "Would you like to point the telescope using [ALTAZ, RADEC]? "
                 )
             except ValueError:
@@ -36,7 +36,7 @@ class obsHelper(object):
                 self.options["coordSys"] = "AltAz"
                 while True:
                     try:
-                        alt = float(raw_input("Enter ALT [in decimal hours]: "))
+                        alt = float(input("Enter ALT [in decimal hours]: "))
                     except ValueError:
                         print("Sorry, I can't parse your response.")
                         continue
@@ -50,7 +50,7 @@ class obsHelper(object):
 
                 while True:
                     try:
-                        az = float(raw_input("Enter AZ [in decimal hours]: "))
+                        az = float(input("Enter AZ [in decimal hours]: "))
                     except ValueError:
                         print("Sorry, I can't parse your response.")
                         continue

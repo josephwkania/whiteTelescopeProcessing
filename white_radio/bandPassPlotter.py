@@ -2,10 +2,11 @@
 """Created by jwk june 2018"""
 
 import matplotlib
+
 matplotlib.use("Agg")  # need to use Agg for non-gui printing
 import h5py
 import csv
-import sys 
+import sys
 import argparse
 import imageio
 import numpy as np

@@ -1,25 +1,28 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-##################################################
+
+#
+# SPDX-License-Identifier: GPL-3.0
+#
 # GNU Radio Python Flow Graph
 # Title: Headless Usrp Giantpulse
-# GNU Radio version: 3.7.13.5
-##################################################
+# GNU Radio version: 3.8.1.0
 
 from datetime import datetime
 from gnuradio import blocks
-from gnuradio import eng_notation
 from gnuradio import fft
-from gnuradio import gr
-from gnuradio import uhd
-from gnuradio.eng_option import eng_option
 from gnuradio.fft import window
+from gnuradio import gr
 from gnuradio.filter import firdes
-from optparse import OptionParser
+import sys
+import signal
+from argparse import ArgumentParser
+from gnuradio.eng_arg import eng_float, intx
+from gnuradio import eng_notation
+from gnuradio import uhd
+import time
 import numpy as np
 import radio_astro
-import time
-
 
 class headless_usrp_giantpulse(gr.top_block):
 
@@ -53,36 +56,35 @@ class headless_usrp_giantpulse(gr.top_block):
         # Blocks
         ##################################################
         self.uhd_usrp_source_1 = uhd.usrp_source(
-        	",".join(("", "")),
-        	uhd.stream_args(
-        		cpu_format="fc32",
-        		channels=range(1),
-        	),
+            ",".join(("", "")),
+            uhd.stream_args(
+                cpu_format="fc32",
+                args='',
+                channels=list(range(0,1)),
+            ),
         )
-        self.uhd_usrp_source_1.set_samp_rate(samp_rate)
-        self.uhd_usrp_source_1.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
         self.uhd_usrp_source_1.set_center_freq(freq, 0)
         self.uhd_usrp_source_1.set_gain(35, 0)
         self.uhd_usrp_source_1.set_antenna('TX/RX', 0)
-        self.uhd_usrp_source_1.set_auto_dc_offset(True, 0)
-        self.uhd_usrp_source_1.set_auto_iq_balance(True, 0)
+        self.uhd_usrp_source_1.set_samp_rate(samp_rate)
+        self.uhd_usrp_source_1.set_time_now(uhd.time_spec(time.time()), uhd.ALL_MBOARDS)
         self.radio_astro_hdf5_sink_1 = radio_astro.hdf5_sink(float, 1, vec_length, "True", recfile, 'A180E55', freq - samp_rate/2, samp_rate/vec_length, 'amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10')
-        self.fft_vxx_0 = fft.fft_vcc(vec_length, True, (window.rectangular(vec_length)), True, 1)
+        self.fft_vxx_0 = fft.fft_vcc(vec_length, True, window.rectangular(vec_length), True, 1)
         self.blocks_vector_to_stream_0 = blocks.vector_to_stream(gr.sizeof_float*1, vec_length)
-        self.blocks_stream_to_vector_1 = blocks.stream_to_vector(gr.sizeof_float*1, vec_length/decimation_factor)
+        self.blocks_stream_to_vector_1 = blocks.stream_to_vector(gr.sizeof_float*1, vec_length//decimation_factor)
         self.blocks_stream_to_vector_0_2 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0_1 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, vec_length)
-        self.blocks_multiply_const_vxx_0_2 = blocks.multiply_const_vcc((custom_window[-vec_length:]))
-        self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vcc((custom_window[2*vec_length:3*vec_length]))
-        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vcc((custom_window[vec_length:2*vec_length]))
-        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc((custom_window[0:vec_length]))
+        self.blocks_multiply_const_vxx_0_2 = blocks.multiply_const_vcc(custom_window[-vec_length:])
+        self.blocks_multiply_const_vxx_0_1 = blocks.multiply_const_vcc(custom_window[2*vec_length:3*vec_length])
+        self.blocks_multiply_const_vxx_0_0 = blocks.multiply_const_vcc(custom_window[vec_length:2*vec_length])
+        self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vcc(custom_window[0:vec_length])
         self.blocks_multiply_conjugate_cc_0 = blocks.multiply_conjugate_cc(vec_length)
         self.blocks_integrate_xx_1 = blocks.integrate_ff(decimation_factor, 1)
         self.blocks_integrate_xx_0_0 = blocks.integrate_ff(int(fast_integration*samp_rate/vec_length), vec_length)
-        self.blocks_integrate_xx_0 = blocks.integrate_ff(int((integration_time)*samp_rate/vec_length)/int(fast_integration*samp_rate/vec_length), vec_length)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*vec_length/decimation_factor, giantout_bin, False)
+        self.blocks_integrate_xx_0 = blocks.integrate_ff(int((integration_time)*samp_rate/vec_length)//int(fast_integration*samp_rate/vec_length), vec_length)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*vec_length//decimation_factor, giantout_bin, False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_delay_0_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, 3*vec_length)
         self.blocks_delay_0_0_0 = blocks.delay(gr.sizeof_gr_complex*1, 2*vec_length)
@@ -169,13 +171,13 @@ class headless_usrp_giantpulse(gr.top_block):
         self.vec_length = vec_length
         self.set_custom_window(self.sinc*np.hamming(4*self.vec_length))
         self.set_sinc_sample_locations(np.arange(-np.pi*4/2.0, np.pi*4/2.0, np.pi/self.vec_length))
-        self.blocks_multiply_const_vxx_0_2.set_k((self.custom_window[-self.vec_length:]))
-        self.blocks_multiply_const_vxx_0_1.set_k((self.custom_window[2*self.vec_length:3*self.vec_length]))
-        self.blocks_multiply_const_vxx_0_0.set_k((self.custom_window[self.vec_length:2*self.vec_length]))
-        self.blocks_multiply_const_vxx_0.set_k((self.custom_window[0:self.vec_length]))
-        self.blocks_delay_0_0_0_0.set_dly(3*self.vec_length)
-        self.blocks_delay_0_0_0.set_dly(2*self.vec_length)
         self.blocks_delay_0_0.set_dly(self.vec_length)
+        self.blocks_delay_0_0_0.set_dly(2*self.vec_length)
+        self.blocks_delay_0_0_0_0.set_dly(3*self.vec_length)
+        self.blocks_multiply_const_vxx_0.set_k(self.custom_window[0:self.vec_length])
+        self.blocks_multiply_const_vxx_0_0.set_k(self.custom_window[self.vec_length:2*self.vec_length])
+        self.blocks_multiply_const_vxx_0_1.set_k(self.custom_window[2*self.vec_length:3*self.vec_length])
+        self.blocks_multiply_const_vxx_0_2.set_k(self.custom_window[-self.vec_length:])
 
     def get_sinc_sample_locations(self):
         return self.sinc_sample_locations
@@ -189,8 +191,8 @@ class headless_usrp_giantpulse(gr.top_block):
 
     def set_timenow(self, timenow):
         self.timenow = timenow
-        self.set_recfile(self.prefix + self.timenow + "_Drift.h5")
         self.set_giantout_bin(self.giant_prefix + self.timenow + ".bin")
+        self.set_recfile(self.prefix + self.timenow + "_Drift.h5")
 
     def get_sinc(self):
         return self.sinc
@@ -230,46 +232,48 @@ class headless_usrp_giantpulse(gr.top_block):
 
     def set_custom_window(self, custom_window):
         self.custom_window = custom_window
-        self.blocks_multiply_const_vxx_0_2.set_k((self.custom_window[-self.vec_length:]))
-        self.blocks_multiply_const_vxx_0_1.set_k((self.custom_window[2*self.vec_length:3*self.vec_length]))
-        self.blocks_multiply_const_vxx_0_0.set_k((self.custom_window[self.vec_length:2*self.vec_length]))
-        self.blocks_multiply_const_vxx_0.set_k((self.custom_window[0:self.vec_length]))
+        self.blocks_multiply_const_vxx_0.set_k(self.custom_window[0:self.vec_length])
+        self.blocks_multiply_const_vxx_0_0.set_k(self.custom_window[self.vec_length:2*self.vec_length])
+        self.blocks_multiply_const_vxx_0_1.set_k(self.custom_window[2*self.vec_length:3*self.vec_length])
+        self.blocks_multiply_const_vxx_0_2.set_k(self.custom_window[-self.vec_length:])
 
 
 def argument_parser():
-    parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
-    parser.add_option(
-        "", "--decimation-factor", dest="decimation_factor", type="intx", default=4,
-        help="Set decimation_factor [default=%default]")
-    parser.add_option(
-        "", "--fast-integration", dest="fast_integration", type="eng_float", default=eng_notation.num_to_str(0.0005),
-        help="Set fast_integration [default=%default]")
-    parser.add_option(
-        "", "--freq", dest="freq", type="eng_float", default=eng_notation.num_to_str(1.4205e9),
-        help="Set freq [default=%default]")
-    parser.add_option(
-        "", "--giant-prefix", dest="giant_prefix", type="string", default="/home/dspradio/giantPulses/",
-        help="Set giant_prefix [default=%default]")
-    parser.add_option(
-        "", "--prefix", dest="prefix", type="string", default="/home/dspradio/grc_data/",
-        help="Set prefix [default=%default]")
-    parser.add_option(
-        "", "--samp-rate", dest="samp_rate", type="eng_float", default=eng_notation.num_to_str(2.5e6),
-        help="Set samp_rate [default=%default]")
-    parser.add_option(
-        "", "--vec-length", dest="vec_length", type="intx", default=1024,
-        help="Set vec_length [default=%default]")
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--decimation-factor", dest="decimation_factor", type=intx, default=4,
+        help="Set decimation_factor [default=%(default)r]")
+    parser.add_argument(
+        "--fast-integration", dest="fast_integration", type=eng_float, default="500.0u",
+        help="Set fast_integration [default=%(default)r]")
+    parser.add_argument(
+        "--freq", dest="freq", type=eng_float, default="1.4205G",
+        help="Set freq [default=%(default)r]")
+    parser.add_argument(
+        "--samp-rate", dest="samp_rate", type=eng_float, default="2.5M",
+        help="Set samp_rate [default=%(default)r]")
+    parser.add_argument(
+        "--vec-length", dest="vec_length", type=intx, default=1024,
+        help="Set vec_length [default=%(default)r]")
     return parser
 
 
 def main(top_block_cls=headless_usrp_giantpulse, options=None):
     if options is None:
-        options, _ = argument_parser().parse_args()
+        options = argument_parser().parse_args()
+    tb = top_block_cls(decimation_factor=options.decimation_factor, fast_integration=options.fast_integration, freq=options.freq, samp_rate=options.samp_rate, vec_length=options.vec_length)
 
-    tb = top_block_cls(decimation_factor=options.decimation_factor, fast_integration=options.fast_integration, freq=options.freq, giant_prefix=options.giant_prefix, prefix=options.prefix, samp_rate=options.samp_rate, vec_length=options.vec_length)
+    def sig_handler(sig=None, frame=None):
+        tb.stop()
+        tb.wait()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, sig_handler)
+    signal.signal(signal.SIGTERM, sig_handler)
+
     tb.start()
     try:
-        raw_input('Press Enter to quit: ')
+        input('Press Enter to quit: ')
     except EOFError:
         pass
     tb.stop()

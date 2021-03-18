@@ -26,7 +26,7 @@ import radio_astro
 
 class headless_usrp_giantpulse(gr.top_block):
 
-    def __init__(self, decimation_factor=4, fast_integration=0.0005, freq=1.4205e9, giant_prefix="/home/dspradio/giantPulses/", prefix="/home/dspradio/grc_data/", samp_rate=2.5e6, vec_length=1024):
+    def __init__(self, decimation_factor=4, fast_integration=0.0005, freq=1.4205e9, giant_prefix="/home/dspradio/giantPulses/", prefix="/data/", samp_rate=2.5e6, vec_length=1024):
         gr.top_block.__init__(self, "Headless Usrp Giantpulse")
 
         ##################################################
@@ -117,8 +117,8 @@ class headless_usrp_giantpulse(gr.top_block):
         self.connect((self.blocks_stream_to_vector_0_2, 0), (self.blocks_multiply_const_vxx_0_0, 0))
         self.connect((self.blocks_stream_to_vector_1, 0), (self.blocks_file_sink_0, 0))
         self.connect((self.blocks_vector_to_stream_0, 0), (self.blocks_integrate_xx_1, 0))
-        self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 1))
+        self.connect((self.fft_vxx_0, 0), (self.blocks_multiply_conjugate_cc_0, 0))
         self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0, 0))
         self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0, 0))
         self.connect((self.uhd_usrp_source_1, 0), (self.blocks_delay_0_0_0_0, 0))

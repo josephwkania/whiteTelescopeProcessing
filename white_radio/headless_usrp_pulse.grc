@@ -1,6 +1,7 @@
 options:
   parameters:
     author: ''
+    catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
@@ -10,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: no_gui
     hier_block_src_path: '.:'
-    id: headless_usrp_giantpulse
+    id: headless_usrp_filterbank
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +23,6 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: ''
-    window_size: ''
   states:
     bus_sink: false
     bus_source: false
@@ -43,7 +43,7 @@ blocks:
     bus_structure: null
     coordinate: [24, 724]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: giantout_bin
   id: variable
   parameters:
@@ -55,7 +55,7 @@ blocks:
     bus_structure: null
     coordinate: [672, 452]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: integration_time
   id: variable
   parameters:
@@ -79,7 +79,7 @@ blocks:
     bus_structure: null
     coordinate: [960, 8]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: sinc
   id: variable
   parameters:
@@ -91,7 +91,7 @@ blocks:
     bus_structure: null
     coordinate: [24, 652]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: sinc_sample_locations
   id: variable
   parameters:
@@ -103,7 +103,7 @@ blocks:
     bus_structure: null
     coordinate: [24, 580]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: timeUTC
   id: variable
   parameters:
@@ -115,7 +115,7 @@ blocks:
     bus_structure: null
     coordinate: [824, 60]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: timenow
   id: variable
   parameters:
@@ -127,25 +127,7 @@ blocks:
     bus_structure: null
     coordinate: [808, 8]
     rotation: 0
-    state: enabled
-- name: blocks_add_xx_0
-  id: blocks_add_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '4'
-    type: complex
-    vlen: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [904, 192]
-    rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_complex_to_real_0_0
   id: blocks_complex_to_real
   parameters:
@@ -159,65 +141,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1108, 232]
+    coordinate: [804.0, 216]
     rotation: 270
-    state: enabled
-- name: blocks_delay_0_0
-  id: blocks_delay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    delay: vec_length
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_ports: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [320, 180]
-    rotation: 0
-    state: enabled
-- name: blocks_delay_0_0_0
-  id: blocks_delay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    delay: 2*vec_length
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_ports: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [320, 260]
-    rotation: 0
-    state: enabled
-- name: blocks_delay_0_0_0_0
-  id: blocks_delay
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    delay: 3*vec_length
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_ports: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [320, 332]
-    rotation: 0
     state: enabled
 - name: blocks_file_sink_0
   id: blocks_file_sink
@@ -226,33 +151,15 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: giantout_bin
+    file: test.bin
     type: float
     unbuffered: 'False'
-    vlen: vec_length//decimation_factor
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1120, 800]
-    rotation: 0
-    state: enabled
-- name: blocks_integrate_xx_0
-  id: blocks_integrate_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    decim: int((integration_time)*samp_rate/vec_length)//int(fast_integration*samp_rate/vec_length)
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
     vlen: vec_length
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 580]
+    coordinate: [1016, 228.0]
     rotation: 0
     state: enabled
 - name: blocks_integrate_xx_0_0
@@ -270,26 +177,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1004, 392]
+    coordinate: [884.0, 224]
     rotation: 270
-    state: enabled
-- name: blocks_integrate_xx_1
-  id: blocks_integrate_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    decim: decimation_factor
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [904, 740]
-    rotation: 0
     state: enabled
 - name: blocks_multiply_conjugate_cc_0
   id: blocks_multiply_conjugate_cc
@@ -304,80 +193,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 192]
+    coordinate: [664.0, 208]
     rotation: 270
-    state: enabled
-- name: blocks_multiply_const_vxx_0
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: custom_window[0:vec_length]
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 316]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_const_vxx_0_0
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: custom_window[vec_length:2*vec_length]
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 244]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_const_vxx_0_1
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: custom_window[2*vec_length:3*vec_length]
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 172]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_const_vxx_0_2
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: custom_window[-vec_length:]
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [632, 92]
-    rotation: 0
     state: enabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
@@ -394,97 +211,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 108]
-    rotation: 0
-    state: enabled
-- name: blocks_stream_to_vector_0_0
-  id: blocks_stream_to_vector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_items: vec_length
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [448, 180]
-    rotation: 0
-    state: enabled
-- name: blocks_stream_to_vector_0_1
-  id: blocks_stream_to_vector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_items: vec_length
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [464, 324]
-    rotation: 0
-    state: enabled
-- name: blocks_stream_to_vector_0_2
-  id: blocks_stream_to_vector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_items: vec_length
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [456, 252]
-    rotation: 0
-    state: enabled
-- name: blocks_stream_to_vector_1
-  id: blocks_stream_to_vector
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_items: vec_length//decimation_factor
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [904, 804]
-    rotation: 0
-    state: enabled
-- name: blocks_vector_to_stream_0
-  id: blocks_vector_to_stream
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_items: vec_length
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [904, 676]
+    coordinate: [256, 256.0]
     rotation: 0
     state: enabled
 - name: decimation_factor
@@ -503,7 +230,7 @@ blocks:
     bus_structure: null
     coordinate: [688, 740]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: fast_integration
   id: parameter
   parameters:
@@ -531,7 +258,7 @@ blocks:
     forward: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    nthreads: '1'
+    nthreads: '4'
     shift: 'True'
     type: complex
     window: window.rectangular(vec_length)
@@ -539,7 +266,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 64]
+    coordinate: [432, 220.0]
     rotation: 0
     state: enabled
 - name: freq
@@ -567,7 +294,7 @@ blocks:
     hide: none
     label: ''
     short_id: ''
-    type: ''
+    type: str
     value: '"/home/dspradio/giantPulses/"'
   states:
     bus_sink: false
@@ -575,7 +302,7 @@ blocks:
     bus_structure: null
     coordinate: [840, 452]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: import_0
   id: import
   parameters:
@@ -588,7 +315,7 @@ blocks:
     bus_structure: null
     coordinate: [536, 12]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: import_0_0
   id: import
   parameters:
@@ -601,7 +328,7 @@ blocks:
     bus_structure: null
     coordinate: [24, 524]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: prefix
   id: parameter
   parameters:
@@ -610,37 +337,15 @@ blocks:
     hide: none
     label: ''
     short_id: ''
-    type: ''
-    value: '"/data/"'
+    type: str
+    value: '"/home/dspradio/grc_data/"'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [648, 4]
     rotation: 0
-    state: enabled
-- name: radio_astro_hdf5_sink_1
-  id: radio_astro_hdf5_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    fname: recfile
-    freq_start: freq - samp_rate/2
-    freq_step: samp_rate/vec_length
-    intype: float
-    n_inputs: '1'
-    notes: amber:39.659,-79.872.  horn3b, lna V3 mod, thin, 5.2/5.2cm probe, 20,12,10
-    pointing: A180E55
-    save_toggle: '"True"'
-    vec_length: vec_length
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1096, 552]
-    rotation: 0
-    state: enabled
+    state: disabled
 - name: samp_rate
   id: parameter
   parameters:
@@ -650,7 +355,7 @@ blocks:
     label: ''
     short_id: ''
     type: eng_float
-    value: 2.5e6
+    value: 25e6
   states:
     bus_sink: false
     bus_source: false
@@ -835,6 +540,38 @@ blocks:
     gain7: '0'
     gain8: '0'
     gain9: '0'
+    gain_type0: default
+    gain_type1: default
+    gain_type10: default
+    gain_type11: default
+    gain_type12: default
+    gain_type13: default
+    gain_type14: default
+    gain_type15: default
+    gain_type16: default
+    gain_type17: default
+    gain_type18: default
+    gain_type19: default
+    gain_type2: default
+    gain_type20: default
+    gain_type21: default
+    gain_type22: default
+    gain_type23: default
+    gain_type24: default
+    gain_type25: default
+    gain_type26: default
+    gain_type27: default
+    gain_type28: default
+    gain_type29: default
+    gain_type3: default
+    gain_type30: default
+    gain_type31: default
+    gain_type4: default
+    gain_type5: default
+    gain_type6: default
+    gain_type7: default
+    gain_type8: default
+    gain_type9: default
     iq_imbal_enb0: 'True'
     iq_imbal_enb1: 'True'
     iq_imbal_enb10: 'True'
@@ -931,43 +668,11 @@ blocks:
     lo_source7: internal
     lo_source8: internal
     lo_source9: internal
-    maxoutbuf: '0'
-    minoutbuf: '0'
+    maxoutbuf: '16384'
+    minoutbuf: '8192'
     nchan: '1'
-    norm_gain0: 'False'
-    norm_gain1: 'False'
-    norm_gain10: 'False'
-    norm_gain11: 'False'
-    norm_gain12: 'False'
-    norm_gain13: 'False'
-    norm_gain14: 'False'
-    norm_gain15: 'False'
-    norm_gain16: 'False'
-    norm_gain17: 'False'
-    norm_gain18: 'False'
-    norm_gain19: 'False'
-    norm_gain2: 'False'
-    norm_gain20: 'False'
-    norm_gain21: 'False'
-    norm_gain22: 'False'
-    norm_gain23: 'False'
-    norm_gain24: 'False'
-    norm_gain25: 'False'
-    norm_gain26: 'False'
-    norm_gain27: 'False'
-    norm_gain28: 'False'
-    norm_gain29: 'False'
-    norm_gain3: 'False'
-    norm_gain30: 'False'
-    norm_gain31: 'False'
-    norm_gain4: 'False'
-    norm_gain5: 'False'
-    norm_gain6: 'False'
-    norm_gain7: 'False'
-    norm_gain8: 'False'
-    norm_gain9: 'False'
     num_mboards: '1'
-    otw: ''
+    otw: sc8
     rx_agc0: Default
     rx_agc1: Default
     rx_agc10: Default
@@ -1038,7 +743,7 @@ blocks:
     label: ''
     short_id: ''
     type: intx
-    value: '1024'
+    value: '256'
   states:
     bus_sink: false
     bus_source: false
@@ -1048,31 +753,12 @@ blocks:
     state: enabled
 
 connections:
-- [blocks_add_xx_0, '0', fft_vxx_0, '0']
 - [blocks_complex_to_real_0_0, '0', blocks_integrate_xx_0_0, '0']
-- [blocks_delay_0_0, '0', blocks_stream_to_vector_0_0, '0']
-- [blocks_delay_0_0_0, '0', blocks_stream_to_vector_0_2, '0']
-- [blocks_delay_0_0_0_0, '0', blocks_stream_to_vector_0_1, '0']
-- [blocks_integrate_xx_0, '0', radio_astro_hdf5_sink_1, '0']
-- [blocks_integrate_xx_0_0, '0', blocks_integrate_xx_0, '0']
-- [blocks_integrate_xx_0_0, '0', blocks_vector_to_stream_0, '0']
-- [blocks_integrate_xx_1, '0', blocks_stream_to_vector_1, '0']
+- [blocks_integrate_xx_0_0, '0', blocks_file_sink_0, '0']
 - [blocks_multiply_conjugate_cc_0, '0', blocks_complex_to_real_0_0, '0']
-- [blocks_multiply_const_vxx_0, '0', blocks_add_xx_0, '3']
-- [blocks_multiply_const_vxx_0_0, '0', blocks_add_xx_0, '2']
-- [blocks_multiply_const_vxx_0_1, '0', blocks_add_xx_0, '1']
-- [blocks_multiply_const_vxx_0_2, '0', blocks_add_xx_0, '0']
-- [blocks_stream_to_vector_0, '0', blocks_multiply_const_vxx_0_2, '0']
-- [blocks_stream_to_vector_0_0, '0', blocks_multiply_const_vxx_0_1, '0']
-- [blocks_stream_to_vector_0_1, '0', blocks_multiply_const_vxx_0, '0']
-- [blocks_stream_to_vector_0_2, '0', blocks_multiply_const_vxx_0_0, '0']
-- [blocks_stream_to_vector_1, '0', blocks_file_sink_0, '0']
-- [blocks_vector_to_stream_0, '0', blocks_integrate_xx_1, '0']
+- [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
 - [fft_vxx_0, '0', blocks_multiply_conjugate_cc_0, '0']
 - [fft_vxx_0, '0', blocks_multiply_conjugate_cc_0, '1']
-- [uhd_usrp_source_1, '0', blocks_delay_0_0, '0']
-- [uhd_usrp_source_1, '0', blocks_delay_0_0_0, '0']
-- [uhd_usrp_source_1, '0', blocks_delay_0_0_0_0, '0']
 - [uhd_usrp_source_1, '0', blocks_stream_to_vector_0, '0']
 
 metadata:
